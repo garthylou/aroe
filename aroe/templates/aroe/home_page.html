@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% load static core_tags %}
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+{% load navigation_tags %}
+
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
+{% block content %}
+    
+	<!-- *****************************************************************************************************************
+	 TITLE & CONTENT
+	 ***************************************************************************************************************** -->
+
+	 <div class="container mt">
+	 	<div class="row">
+	 		{% if self.carousel_items.all %}
+		 	<div class="col-lg-10 col-lg-offset-1 centered">
+			 	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+			 		{% if self.carousel_items.all|length > 1 %}
+				  <!-- Indicators -->
+				  <ol class="carousel-indicators">
+				  	{% for carousel_item in self.carousel_items.all %}
+				    <li data-target="#carousel-example-generic" data-slide-to="{{ forloop.counter0 }}" {% if forloop.first %} class="active" {% endif %} ></li>
+				    {% endfor %}
+				  </ol>
+				  {% endif %}
+				  <!-- Wrapper for slides -->
+
+				  <div class="carousel-inner">
+				  	{% for carousel_item in self.carousel_items.all %}
+				    <div class="item{% if forloop.first %} active{% endif %}">
+				    	{% image carousel_item.image width-1000 as carouselimagedata %}
+				      <img src="{{ carouselimagedata.url }}" style="width: 100%; min-height: {{ carouselimagedata.height }}px;" alt="{{ carouselimagedata.alt }}">
+				      <div class="carousel-caption">
+						<h3>{{ carousel_item.caption }}</h3>
+					  </div>
+				    </div>
+				    {% endfor %}
+				  </div>
+				</div><!--/Carousel -->
+		 	</div>
+		 	{% endif %}
+		 	
+		 	<div class="col-md-3 col-lg-3">
+			 	<div class="spacing"></div>
+		 		<h4 class="content-title-h4">ACTUALITÉS</h4>
+		 		{{ self.news | richtext }}
+		 	</div>
+		 	
+		 	<div class="col-md-8 col-lg-8 col-lg-offset-1">
+			 	<div class="spacing"></div>
+		 		<h4 class="content-title-h4">Association</h4>
+		 		<div class="hline"></div>
+		 		<div class="row">
+		 			<div class="col-xs-12 col-md-8 col-lg-8 col-md-offset-2 col-lg-offset-2">
+				 		<div id="portfoliowrap">
+					 		<div class="portfolio-centered">
+					 			<div class="row">
+					 				{% association_menu as associationmenu %}
+					 				{% for menuitem in associationmenu %}
+					 				<div class="col-xs-6 col-md-3 col-lg-3">
+							 			<div class="portfolio-item">
+											<div class="he-wrap tpl6">
+												<div class="tile">
+													<div class="tile-icon"><i class="{{menuitem.icon_class}} fa-4x"></i></div>
+													<div class="he-view">
+														<div class="bg a0" data-animate="fadeIn">
+							                                <h3 class="a1" data-animate="fadeInDown">{{ menuitem.title }}</h3>
+							                        	</div><!-- he bg -->
+													</div><!-- he view -->		
+												</div>
+											</div><!-- he wrap -->
+										</div><!-- end portfolio-item -->
+									</div>
+									{% endfor %}
+								</div>
+					 		</div>
+					 	</div>
+					 </div>
+				</div>
+		 	</div>
+		 	
+		 	<div class="col-md-3 col-lg-3">
+		 		<div class="coming-trainings">
+		 			<h4>Stages à venir</h4>
+		 			<div class="hline-w"></div>
+		 			<div class="content-trainings">
+		 				<ul>
+		 					<li><div><div class="training-date"><span class="entry-day">27</span><span class="entry-month">Fév</span></div><div class="training-title">Stage tissulaire</div><span class="label label-danger pull-right" data-toggle="tooltip" data-placement="left" title="Complet">Complet</span></div></li>
+		 					<li><div><div class="training-date"><span class="entry-day">2</span><span class="entry-month">Avr</span></div><div class="training-title">Stage botanique </div><span class="label label-warning pull-right" data-toggle="tooltip" data-placement="left" title="2 places restantes">2</span></div></li>
+		 					<li><div><div class="training-date"><span class="entry-day">16</span><span class="entry-month">Juin</span></div><div class="training-title">Stage ZZZ <span class="label label-success pull-right" data-toggle="tooltip" data-placement="left" title="15 places restantes">15</span></div></div></li>
+		 				</ul>
+		 			</div>
+		 		</div>
+		 	</div>
+		 	<div class="col-md-9 col-lg-9">
+		 		<h4 class="content-title-h4">Derniers articles</h4>
+		 		<div class="hline"></div>
+		 		<div class="row">
+		 			<div class="col-md-3 col-lg-3">
+		 				<div class="article-extract">
+		 					<a href="#">
+		 						<h5>Titre</h5>
+		 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam ...</p>
+		 					</a>
+		 				</div>
+		 			</div>
+		 			<div class="col-md-3 col-lg-3">
+		 				<div class="article-extract">
+		 					<a href="#">
+		 						<h5>Titre</h5>
+		 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam ...</p>
+		 					</a>
+		 				</div>
+		 			</div>
+		 			<div class="col-md-3 col-lg-3">
+		 				<div class="article-extract">
+		 					<a href="#">
+		 						<h5>Titre</h5>
+		 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam ...</p>
+		 					</a>
+		 				</div>
+		 			</div>
+		 			<div class="col-md-3 col-lg-3">
+		 				<div class="article-extract">
+		 					<a href="#">
+		 						<h5>Titre</h5>
+		 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam ...</p>
+		 					</a>
+		 				</div>
+		 			</div>
+		 		</div>
+		 	</div>
+	 	</div><!--/row -->
+	 </div><!--/container -->
+
+{% endblock %}
