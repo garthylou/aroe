@@ -1,0 +1,12 @@
+#wagtail-userbar{
+   top:75px;
+}
+
+.poste {
+	text-align:center;
+	font-weight:bold;
+}
+
+.cartouche-poste {
+	margin-left: 15%;
+}

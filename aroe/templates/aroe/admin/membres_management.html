@@ -1,0 +1,156 @@
+{% extends "wagtailadmin/base.html" %}
+{% load i18n %}
+{% load gravatar compress %}
+{% block titletag %}{% trans "Members management" %}{% endblock %}
+{% block bodyclass %}homepage{% endblock %}
+
+
+{% block css %}
+    {% compress css %}
+        <link rel="stylesheet" href="{{ STATIC_URL }}wagtailadmin/scss/vendor/jquery-ui/jquery-ui-1.10.3.verdant.css" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="{{ STATIC_URL }}wagtailadmin/scss/core.scss" type="text/x-scss" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/admin/bootstrap-wagtail-hack.css" type="text/x-scss" />
+    {% endcompress %}
+
+    {% block extra_css %}
+		{% compress css %}
+		<link rel="stylesheet" href="{{ STATIC_URL}}bower_components/angular-xeditable/dist/css/xeditable.css"/>
+		<link rel="stylesheet" href="{{ STATIC_URL }}wagtailadmin/scss/layouts/home.scss" type="text/x-scss" />
+		<link rel="stylesheet" href="{{ STATIC_URL }}css/admin/aroe-admin.css" type="text/css" />
+		{% endcompress %}
+	{% endblock %}
+{% endblock %}
+
+
+
+{% block content %}
+<header class="merged nice-padding">
+<div class="row row-flush">
+{% if user.email %}
+<div class="col1">
+<div class="avatar icon icon-user"><img src="{% gravatar_url user.email %}" /></div>
+</div>
+{% endif %}
+<div class="col9">
+<h1>{% block branding_welcome %}{% blocktrans %}Members managements{% endblocktrans %}{% endblock %}</h1>
+</div>
+</div>
+</header>
+{% if panels %}
+{% for panel in panels %}
+{{ panel.render }}
+{% endfor %}
+{% else %}
+<div xmlns:ng="http://angularjs.org"  ng-app="aroe" ng-cloak>
+ <div class="container" ng-controller="MembersRowCtrl">
+ 	<div class="row">
+ 		<div class="col-md-2">
+ 			<div class="row">
+ 				<div class="col-md-9 filter-member">
+ 					<span><input ng-model="query" placeholder="{% trans 'Filter' %}"></span>
+ 				</div>
+ 				<div class="col-md-3">
+ 					<button class="btn btn-default btn-xs" ng-click="addUser()" aria-label="Add user" type="button">
+ 						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+ 						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+ 					</button>
+ 				</div>
+ 			</div>
+ 			<div class="list-item">
+	 			<div ng-repeat="user in users | orderBy:'family_name':false | filter:query">
+	 				<div class="item" ng-click="selectUser(user)" ng-class="{'selected-item' : user.id == selecteduser.id }">
+	 					<span>{$ user.family_name $} </span><span>{$ user.firstname $} </span>
+	 				</div>
+	 			</div>
+ 			</div>
+ 		</div>
+ 		<div class="col-md-10 border-col-left">
+ 			<div class="row">
+ 				<div class="col-md-2">
+ 					<img src="{{ STATIC_URL }}/images/avatar_silhouette-150x150.jpg" alt="avatar" ng-show="selecteduser.photo == null && selecteduser != null"/>
+ 					<img ng-src="{$ selecteduser.photo $}" alt="avatar" ng-show="selecteduser.photo != null && selecteduser != null" />
+ 					<button class="btn btn-xs btn-default" ng-file-select ng-file-change="upload($files)" ng-show="selecteduser != null" ng-disabled="editableForm.$visible || selecteduser.id == null" ng-model="picFile">Change photo</button>
+ 					<img ng-show="picFile[0].dataUrl != null" ng-src="{$ picFile[0].dataUrl $}" class="thumb">
+					<span class="progress" ng-show="picFile[0].progress >= 0">		
+						<div class="ng-binding" style="width:{$ picFile[0].progress $}%" ng-bind="picFile[0].progress + '%'"></div>
+					</span>	
+
+ 				</div>
+ 				<div class="col-md-10">
+ 					<div class="row">
+ 						<form editable-form name="editableForm" onaftersave="saveUser(selecteduser)" class="form-inline">
+	 						<div class="col-md-6 form-group">
+	 							<!-- editable name -->
+	 							<label for="name">{% trans 'Name' %}: </label>
+			        			<span editable-text="selecteduser.family_name" e-name="family_name" e-form="editableForm" e-required id="family_name">{$ selecteduser.family_name || {% trans 'Empty' %} $}
+			        			</span>
+	 						</div>
+	 						<div class="col-md-6 form-group">
+	 							<!-- editable name -->
+	 							<label for="firstname">{% trans 'Firstname' %}: </label>
+			        			<span editable-text="selecteduser.firstname" e-name="firstname" e-form="editableForm" e-required id="firstname">{$ selecteduser.firstname || {% trans 'Empty' %} $}
+			        			</span>
+	 						</div>
+	 						<div class="col-md-12">
+	 							<label for="address">{% trans 'Address'%}: </label>
+	 							<span editable-text="selecteduser.address" e-name="address" e-form="editableForm" >{$ selecteduser.address || {% trans 'Empty' %} $}</span>
+	 						</div>
+	 						<div class="col-md-5">
+	 							<label for="zipcode">{% trans 'Zipcode'%}: </label>
+	 							<span editable-text="selecteduser.zipcode" e-name="zipcode" e-form="editableForm" e-style="max-width:50%">{$ selecteduser.zipcode || {% trans 'Empty' %} $}</span>
+	 						</div>
+	 						<div class="col-md-7">
+	 							<label for="city">{% trans 'City'%}: </label>
+	 							<span editable-text="selecteduser.city" e-name="city" e-form="editableForm" >{$ selecteduser.city || {% trans 'Empty' %} $}</span>
+	 						</div>
+	 						<div class="col-md-12">
+	 							<label for="phone">{% trans 'Phone'%}: </label>
+	 							<span editable-tel="selecteduser.phone" e-name="phone" e-form="editableForm" >{$ selecteduser.phone || {% trans 'Empty' %} $}</span>
+	 						</div>
+	 						<div class="col-md-12">
+	 							<label for="email">{% trans 'Email'%}: </label>
+	 							<span editable-email="selecteduser.email" e-name="email" e-form="editableForm" e-style="width:200%" >{$ selecteduser.email || {% trans 'Empty' %} $}</span>
+	 						</div>
+	 						<div class="buttons">
+						      <!-- button to show form -->
+						      <button type="button" class="btn btn-default" ng-click="editableForm.$show()" ng-show="!editableForm.$visible && selecteduser != null">
+						        {% trans 'Edit' %}
+						      </button>
+						      <button type="button" class="btn btn-danger" ng-click="delete(selecteduser)" ng-show="!editableForm.$visible && selecteduser != null">
+						        {% trans 'Delete' %}
+						      </button>
+						      <!-- buttons to submit / cancel form -->
+						      <span ng-show="editableForm.$visible">
+						        <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+						          {% trans 'Save' %}
+						        </button>
+						        <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+						          {% trans 'Cancel' %}
+						        </button>
+						      </span>
+						    </div>
+ 						</form>
+ 					</div>
+ 				</div>
+ 			</div>
+ 		</div>
+ 	</div>
+</div>
+</div>
+{% endif %}
+{% endblock %}
+
+
+{% block extra_js %}
+{% compress js %}
+<script src="{{STATIC_URL}}bower_components/angular/angular.min.js"></script>
+<script src="{{STATIC_URL}}bower_components/angular-cookies/angular-cookies.min.js"></script>
+<script src="{{STATIC_URL}}bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+<script src="{{STATIC_URL}}bower_components/angular-xeditable/dist/js/xeditable.min.js"></script>
+<script src="{{STATIC_URL}}bower_components/ng-file-upload/angular-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
+<script src="{{STATIC_URL}}bower_components/ng-file-upload/angular-file-upload.min.js"></script> 
+<script src="{{ STATIC_URL}}js/app/members.js"></script>
+<script src="{{ STATIC_URL}}js/app/app.js"></script>
+{% endcompress %}
+{% endblock %}

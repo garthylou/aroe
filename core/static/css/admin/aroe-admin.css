@@ -1,0 +1,26 @@
+.border-col-left 
+{
+	border-left : 1px solid #666666;
+	margin-top : 5px;
+}
+
+.item {
+	border-radius : 2px;
+	background-color: #eeeeee;
+	padding : 4px;
+}
+
+.selected-item {
+	background-color: #ddd;
+}
+.list-item {
+	padding-top : 5px;
+}
+.filter-member {
+	padding-left : 0px;
+}
+
+.filter-member  input 
+{
+	width:120%;
+}

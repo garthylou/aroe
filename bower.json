@@ -1,0 +1,22 @@
+{
+  "name": "aroe",
+  "description": "AROE",
+  "version": "0.0.1",
+  "homepage": "https://github.com/garthylou/AROE",
+  "license": "GNU-GPL",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "3.x.x",
+    "angular": "1.2.x",
+    "angular-animate": "1.2.x",
+    "angular-loader": "1.2.x",
+    "angular-resource": "1.2.x",
+    "angular-xeditable": "0.1.x",
+    "angular-cookies": "1.2.x",
+    "angular-i18n": "1.2.x",
+    "angular-bootstrap": "0.9.x",
+    "angular-loading-bar": "0.6.x",
+    "webshim": "1.15.x",
+    "ng-file-upload": "latest"
+  }
+}

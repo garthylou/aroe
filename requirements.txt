@@ -9,3 +9,5 @@ wagtail==0.8.4
 # Recommended components to improve performance in production:
 # django-redis-cache==0.13.0
 # django-celery==3.1.10
+
+djangorestframework>=3.0

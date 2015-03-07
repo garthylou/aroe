@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% load static core_tags %}
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+{% load navigation_tags %}
+
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
+{% block content %}
+
+	<!-- *****************************************************************************************************************
+	 TITLE & CONTENT
+	 ***************************************************************************************************************** -->
+
+	 <div class="container mt">
+	 	<div class="row">
+		 	<div class="col-md-12 col-lg-12">
+		 		<div class="row">
+		 			<div class="col-md-2 col-lg-2">
+		 				<div class="thumbnail">
+		 					<img src="http://placehold.it/250x250">
+		 				</div>
+		 			</div>
+		 			<div class="col-md-2 col-lg-2">
+		 				<div class="thumbnail">
+		 					<img src="http://placehold.it/250x250">
+		 				</div>
+		 			</div>
+		 			<div class="col-md-2 col-lg-2">
+		 				<div class="thumbnail">
+		 					<img src="http://placehold.it/250x250">
+		 				</div>
+		 			</div>
+		 		</div>
+		 	</div>
+	 	</div><!--/row -->
+	 </div><!--/container -->
+
+	 
+{% endblock %}

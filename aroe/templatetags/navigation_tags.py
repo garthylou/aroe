@@ -11,6 +11,7 @@ register = template.Library()
 def association_menu(context):
 	request = context['request']
 	association_page_list = AssociationRootPage.objects.all()
+	menuitems = []
 	if len(association_page_list) == 1 :
 		menuitems = AssociationTilePage.objects.live().descendant_of(association_page_list[0])
 	return menuitems

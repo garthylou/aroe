@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% load static core_tags %}
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+{% load navigation_tags %}
+
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
+{% block content %}
+
+	<!-- *****************************************************************************************************************
+	 TITLE & CONTENT
+	 ***************************************************************************************************************** -->
+
+	 <div class="container mt">
+	 	<div class="row">
+	 		<h3>Le bureau de l'AROE</h3>
+		 	<div class="col-md-12 col-lg-12">
+		 		<div class="row">
+		 			{% if self.poste_items.all %}
+		 			{% for poste_item in self.poste_items.all %}
+		 			<div class="col-md-3 col-lg-3">
+		 				<div class="thumbnail">
+		 					<p class="poste">{{ poste_item.caption}}</p>
+		 					{% if poste_item.member.photo %}
+		 					<img src="{{poste_item.member.photo.url}}" alt="Avatar {{poste_item.member.family_name}} {{poste_item.member.firstname}}">
+		 					{% else %}
+		 					<img src="{{ STATIC_URL }}/images/avatar_silhouette-150x150.jpg"alt="Avatar {{poste_item.member.family_name}} {{poste_item.member.firstname}}">
+		 					{% endif %}
+		 					<div class="cartouche-poste">
+			 					<address>
+			 						<strong>{{ poste_item.member.family_name }} {{poste_item.member.firstname}}</strong><br>	
+			 						{{ poste_item.member.address }}<br>
+			 						{{ poste_item.member.zipcode }} {{poste_item.member.city }}<br>
+			 						{{ poste_item.member.phone }}
+			 					</address>
+			 				</div>
+		 				</div>
+		 				
+		 			</div>
+		 			{% endfor %}
+		 			{% endif %}
+		 		</div>
+		 	</div>
+	 	</div><!--/row -->
+	 </div><!--/container -->
+
+	 
+{% endblock %}

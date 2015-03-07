@@ -32,7 +32,7 @@ class CarouselItem(models.Model):
 
 # Home page
 class HomePage(Page):
-    news = RichTextField(blank=True,verbose_name="News")
+    news = RichTextField(blank=True,verbose_name="News",help_text=_("Text to put into the News part on Home."))
     search_fields = Page.search_fields + (
 		index.SearchField('news'),
 	)
@@ -45,19 +45,19 @@ class HomePageCarouselItem(Orderable, CarouselItem):
 
 HomePage.content_panels = [
 	FieldPanel('title', classname="full title"),
-	FieldPanel('news', classname="full"),
+	FieldPanel('news', classname="full", ),
 	InlinePanel(HomePage, 'carousel_items', label="Carousel items"),
 ]
 
 
 # AssociationRootPage
 class AssociationRootPage(Page):
-	subpage_types = ['aroe.AssociationTilePage']
+	subpage_types = ['aroe.AssociationTilePage', 'aroe.BureauPage', 'aroe.MembresPage']
 	class Meta:
 		verbose_name = _('Association')
 
 class AssociationTilePage(Page):
-	icon_class = models.CharField(verbose_name=_('Icon class'), max_length=255, blank=True)
+	icon_class = models.CharField(verbose_name=_('Icon class'), max_length=255, blank=True, help_text=_("Text which represents icon from http://fontawesome.io/icons/"))
 	class Meta:
 		verbose_name = _('Association tile')
 
@@ -65,3 +65,34 @@ AssociationTilePage.content_panels = [
 	FieldPanel('title', classname="full title"),
 	FieldPanel('icon_class', classname="full"),
 ]
+
+# BureauPage
+class Poste(Orderable, models.Model):
+	member = models.ForeignKey('aroeapi.Member', 
+		null=True,
+		blank=True,
+		on_delete=models.SET_NULL,
+		related_name='+',
+		verbose_name=_('Member')
+		)
+	caption = models.CharField(verbose_name=_("Caption"), max_length=255, blank=True)
+	panels = [
+		FieldPanel('caption',),
+		FieldPanel('member',)
+
+	]
+	page = ParentalKey('aroe.BureauPage', related_name='poste_items')
+
+
+
+class BureauPage(AssociationTilePage):
+	pass
+
+BureauPage.content_panels = [
+	FieldPanel('title', classname="full title"),
+	FieldPanel('icon_class', classname="full"),
+	InlinePanel(BureauPage, 'poste_items', label="Poste items"),
+]
+
+class MembresPage(AssociationTilePage):
+	pass
