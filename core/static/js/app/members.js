@@ -92,3 +92,33 @@ membersMgt.controller('MembersRowCtrl', ['$scope', '$filter', '$http', '$upload'
     };
 
 }]);
+
+
+
+
+
+
+
+
+
+
+
+/* Front End controller */
+
+
+var members = angular.module('aroeMembers', []);
+
+members.controller('MembersDisplayCtrl', ['$scope', '$filter', '$http', 
+                                function($scope, $filter, $http) {
+
+  $scope.reloadMembers = function()
+  {
+    $http.get('/api/members').success(function(data)
+    {
+      $scope.members = data;
+    })
+  }
+
+  $scope.reloadMembers();
+
+}]);

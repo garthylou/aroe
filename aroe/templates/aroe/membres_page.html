@@ -4,6 +4,8 @@
 {% load wagtailcore_tags %}
 {% load wagtailimages_tags %}
 {% load navigation_tags %}
+{% load compress %}
+{% load i18n %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
@@ -13,29 +15,41 @@
 	 TITLE & CONTENT
 	 ***************************************************************************************************************** -->
 
-	 <div class="container mt">
-	 	<div class="row">
+	 <div class="container mt" xmlns:ng="http://angularjs.org" ng-app="aroeFrontEnd" ng-cloak>
+	 	<div class="row" ng-controller="MembersDisplayCtrl">
 		 	<div class="col-md-12 col-lg-12">
 		 		<div class="row">
-		 			<div class="col-md-2 col-lg-2">
-		 				<div class="thumbnail">
-		 					<img src="http://placehold.it/250x250">
+		 			<div class="col-md-12 filter-member">
+ 						<span><input ng-model="query" placeholder="{% trans 'Filter' %}"></span>
+ 					</div>
+ 					<div class="col-md-2 col-lg-2" ng-repeat="member in members | orderBy:'family_name':false | filter:query">
+ 						<div class="thumbnail">
+ 							<img src="{{ STATIC_URL }}/images/avatar_silhouette-150x150.jpg" alt="avatar" ng-show="member.photo == null"/>
+ 							<img ng-src="{$ member.photo $}" alt="avatar" ng-show="member.photo != null" />
+ 							<div class="cartouche-membre">
+			 					<address>
+			 						<strong>{$ member.family_name $} {$member.firstname$}</strong><br>	
+			 						{$ member.address $}<br>
+			 						{$ member.zipcode $} {$member.city $}<br>
+			 						{$ member.phone $}
+			 					</address>
+			 				</div>
 		 				</div>
-		 			</div>
-		 			<div class="col-md-2 col-lg-2">
-		 				<div class="thumbnail">
-		 					<img src="http://placehold.it/250x250">
-		 				</div>
-		 			</div>
-		 			<div class="col-md-2 col-lg-2">
-		 				<div class="thumbnail">
-		 					<img src="http://placehold.it/250x250">
-		 				</div>
-		 			</div>
-		 		</div>
+	 				</div>
+	 			</div>
 		 	</div>
 	 	</div><!--/row -->
 	 </div><!--/container -->
 
 	 
+{% endblock %}
+
+
+{% block extra_js %}
+{% compress js %}
+<script src="{{STATIC_URL}}bower_components/angular/angular.min.js"></script>
+<script src="{{STATIC_URL}}bower_components/angular-cookies/angular-cookies.min.js"></script>
+<script src="{{ STATIC_URL}}js/app/members.js"></script>
+<script src="{{ STATIC_URL}}js/app/app.js"></script>
+{% endcompress %}
 {% endblock %}

@@ -22,7 +22,6 @@ def membres_admin_view( request ):
 		'user': request.user
 	})
 
-
 @hooks.register('register_admin_urls')
 def urlconf_time():
 	# Add "wagtailadmin.access_admin" permission check
@@ -40,5 +39,5 @@ def urlconf_time():
 
 
 @hooks.register('register_admin_menu_item')
-def register_frank_menu_item():
+def register_members_menu_item():
   return MenuItem(_('Members Management'), reverse('membres'), classnames='icon icon-group', order=100)

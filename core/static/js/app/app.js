@@ -22,3 +22,19 @@ aroeApp.run(['$http', '$cookies', function ($http, $cookies) {
 	$http.defaults.headers.put['X-CSRFToken'] = $cookies.csrftoken;
 	$http.defaults.headers.common['X-CSRFToken'] = $cookies.csrftoken;
 }]);
+
+
+
+
+
+/* Front end App */
+
+var aroeFrontendApp = angular.module('aroeFrontEnd', [
+	'ngCookies',
+	'aroeMembers',
+]);
+
+aroeFrontendApp.config(function ($interpolateProvider) {
+	$interpolateProvider.startSymbol('{$');
+	$interpolateProvider.endSymbol('$}');
+});

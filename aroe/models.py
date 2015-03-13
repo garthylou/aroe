@@ -52,7 +52,12 @@ HomePage.content_panels = [
 
 # AssociationRootPage
 class AssociationRootPage(Page):
-	subpage_types = ['aroe.AssociationTilePage', 'aroe.BureauPage', 'aroe.MembresPage']
+	subpage_types = [
+		'aroe.AssociationTilePage',
+		'aroe.BureauPage',
+		'aroe.MembresPage',
+		'aroe.TrainingPage'
+	]
 	class Meta:
 		verbose_name = _('Association')
 
@@ -95,4 +100,8 @@ BureauPage.content_panels = [
 ]
 
 class MembresPage(AssociationTilePage):
+	pass
+
+
+class TrainingPage(AssociationTilePage):
 	pass

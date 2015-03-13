@@ -1,0 +1,147 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: AROE 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-13 09:24+0100\n"
+"PO-Revision-Date: 2015-03-13 09:28+0100\n"
+"Last-Translator: GURY <jeanbaptiste.gury@gmail.com>\n"
+"Language-Team: French team <garthylou@gmx.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: aroe/models.py:23
+msgid "image"
+msgstr "image"
+
+#: aroe/models.py:25
+msgid "Title"
+msgstr "Titre"
+
+#: aroe/models.py:35
+msgid "Text to put into the News part on Home."
+msgstr "Texte à placer dans les Nouveautés en page d'accueil"
+
+#: aroe/models.py:40
+msgid "Home"
+msgstr "Accueil"
+
+#: aroe/models.py:62
+msgid "Association"
+msgstr "Association"
+
+#: aroe/models.py:65
+msgid "Icon class"
+msgstr "Classe d'icône"
+
+#: aroe/models.py:65
+msgid "Text which represents icon from http://fontawesome.io/icons/"
+msgstr "Texte qui représente une icône selon http://fontawesome.io/icons/"
+
+#: aroe/models.py:67
+msgid "Association tile"
+msgstr "Tuile association"
+
+#: aroe/models.py:81
+msgid "Member"
+msgstr "Membre"
+
+#: aroe/models.py:83
+msgid "Caption"
+msgstr "Intitulé"
+
+#: aroe/templates/aroe/admin/membres_management.html:4
+msgid "Members management"
+msgstr "Gestion des membres"
+
+#: aroe/templates/aroe/admin/membres_management.html:36
+msgid "Members managements"
+msgstr "Gestion des membres"
+
+#: aroe/templates/aroe/admin/membres_management.html:51
+#: aroe/templates/aroe/membres_page.html:23
+msgid "Filter"
+msgstr "Filtre"
+
+#: aroe/templates/aroe/admin/membres_management.html:85
+msgid "Name"
+msgstr "Nom"
+
+#: aroe/templates/aroe/admin/membres_management.html:86
+#: aroe/templates/aroe/admin/membres_management.html:92
+#: aroe/templates/aroe/admin/membres_management.html:97
+#: aroe/templates/aroe/admin/membres_management.html:101
+#: aroe/templates/aroe/admin/membres_management.html:105
+#: aroe/templates/aroe/admin/membres_management.html:109
+#: aroe/templates/aroe/admin/membres_management.html:113
+msgid "Empty"
+msgstr "N/A"
+
+#: aroe/templates/aroe/admin/membres_management.html:91
+msgid "Firstname"
+msgstr "Prénom"
+
+#: aroe/templates/aroe/admin/membres_management.html:96
+#: aroeapi/models.py:22
+msgid "Address"
+msgstr "Adresse"
+
+#: aroe/templates/aroe/admin/membres_management.html:100
+#: aroeapi/models.py:23
+msgid "Zipcode"
+msgstr "Code postal"
+
+#: aroe/templates/aroe/admin/membres_management.html:104
+#: aroeapi/models.py:24
+msgid "City"
+msgstr "Ville"
+
+#: aroe/templates/aroe/admin/membres_management.html:108
+#: aroeapi/models.py:25
+msgid "Phone"
+msgstr "Téléphone"
+
+#: aroe/templates/aroe/admin/membres_management.html:112
+#: aroeapi/models.py:26
+msgid "Email"
+msgstr "Email"
+
+#: aroe/templates/aroe/admin/membres_management.html:118
+msgid "Edit"
+msgstr "Éditer"
+
+#: aroe/templates/aroe/admin/membres_management.html:121
+msgid "Delete"
+msgstr "Effacer"
+
+#: aroe/templates/aroe/admin/membres_management.html:126
+msgid "Save"
+msgstr "Sauver"
+
+#: aroe/templates/aroe/admin/membres_management.html:129
+msgid "Cancel"
+msgstr "Annuler"
+
+#: aroe/wagtail_hooks.py:43
+msgid "Members Management"
+msgstr "Gestion des membres"
+
+#: aroeapi/models.py:20
+msgid "Family name"
+msgstr "Nom de famille"
+
+#: aroeapi/models.py:21
+msgid "First name"
+msgstr "Prénom"
+
+#: aroeapi/models.py:27
+msgid "Photo"
+msgstr "Photo"
+
