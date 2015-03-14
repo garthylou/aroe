@@ -70,6 +70,11 @@
  				<div class="col-md-2">
  					<img src="{{ STATIC_URL }}/images/avatar_silhouette-150x150.jpg" alt="avatar" ng-show="selecteduser.photo == null && selecteduser != null"/>
  					<img ng-src="{$ selecteduser.photo $}" alt="avatar" ng-show="selecteduser.photo != null && selecteduser != null" />
+ 					<button type="button" class="close pull-right"
+						ng-click="clearAvatar()"
+						ng-show="selecteduser.photo != null && selecteduser != null"
+						><span aria-hidden="true">&times;</span><span class="sr-only">{% trans 'Clear avatar' %}</span>
+					</button>
  					<button class="btn btn-xs btn-default" ng-file-select ng-file-change="upload($files)" ng-show="selecteduser != null" ng-disabled="editableForm.$visible || selecteduser.id == null" ng-model="picFile">Change photo</button>
  					<img ng-show="picFile[0].dataUrl != null" ng-src="{$ picFile[0].dataUrl $}" class="thumb">
 					<span class="progress" ng-show="picFile[0].progress >= 0">		

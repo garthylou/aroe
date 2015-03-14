@@ -27,20 +27,25 @@ membersMgt.controller('MembersRowCtrl', ['$scope', '$filter', '$http', '$upload'
   $scope.reloadUsers();
 
   $scope.saveUser = function(data) {
-    if (data.id)
+    var user = angular.copy(data);
+    // Do not send the url of the photo.
+    delete user.photo;
+
+    if (user.id)
     {
-      delete data.photo;
       //$scope.user not updated yet
-      $http.put('/api/members/1', data).success(function()
+      $http.put('/api/members/'+user.id, user).success(function(result)
         {
           $scope.reloadUsers();
+          $scope.selecteduser = result;
         });
-      return data;
+      return user;
     } else {
-      delete data.photo;
-      $http.post('/api/members', data).success(function() {
+      $http.post('/api/members', user).success(function(result) {
         $scope.reloadUsers();
-      })
+        $scope.selecteduser = result;
+      });
+      return user;
     }
   };
 
@@ -90,6 +95,17 @@ membersMgt.controller('MembersRowCtrl', ['$scope', '$filter', '$http', '$upload'
             }
         }
     };
+
+    $scope.clearAvatar = function(){
+      var data = {
+        photo : null,
+      }
+      $http.put('/api/avatars/'+$scope.selecteduser.id, data).success(function(result)
+        {
+          $scope.reloadUsers();
+          $scope.selecteduser.photo = result.photo;
+        });
+    }
 
 }]);
 
