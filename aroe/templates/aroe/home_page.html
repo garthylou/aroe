@@ -4,6 +4,8 @@
 {% load wagtailcore_tags %}
 {% load wagtailimages_tags %}
 {% load navigation_tags %}
+{% load training_tags %}
+{% load i18n %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
@@ -90,9 +92,20 @@
 		 			<div class="hline-w"></div>
 		 			<div class="content-trainings">
 		 				<ul>
-		 					<li><div><div class="training-date"><span class="entry-day">27</span><span class="entry-month">Fév</span></div><div class="training-title">Stage tissulaire</div><span class="label label-danger pull-right" data-toggle="tooltip" data-placement="left" title="Complet">Complet</span></div></li>
-		 					<li><div><div class="training-date"><span class="entry-day">2</span><span class="entry-month">Avr</span></div><div class="training-title">Stage botanique </div><span class="label label-warning pull-right" data-toggle="tooltip" data-placement="left" title="2 places restantes">2</span></div></li>
-		 					<li><div><div class="training-date"><span class="entry-day">16</span><span class="entry-month">Juin</span></div><div class="training-title">Stage ZZZ <span class="label label-success pull-right" data-toggle="tooltip" data-placement="left" title="15 places restantes">15</span></div></div></li>
+		 					{% next_training as nexttraining %}
+		 					{% for training in nexttraining %}
+		 					<li><div><div class="training-date"><span class="entry-day">{{training.start |date:'d'}} </span><span class="entry-month">{{training.start |date:'M'}}</span></div><div class="training-title">{{training.title}}</div>
+		 						{% with remaining_seats=training|remaining_seats class_rate=training|occupation_rate|rate_to_class %}
+		 						{% if remaining_seats == 0 %}
+		 						<span class="label label-danger pull-right" data-toggle="tooltip" data-placement="left" title="Complet">Complet</span>
+		 						{% elif remaining_seats != '' %}
+		 						<span class="label {{ class_rate }} pull-right" data-toggle="tooltip" data-placement="left" title="{{remaining_seats}} places restantes">{{remaining_seats}}</span>
+		 						{% endif %}
+		 						{% endwith %}
+		 					</div></li>
+		 					{% empty %}
+		 					<li><div>{% trans 'No scheduled training' %} </div>
+		 					{% endfor %}
 		 				</ul>
 		 			</div>
 		 		</div>

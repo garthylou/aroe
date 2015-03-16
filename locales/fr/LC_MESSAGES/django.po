@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AROE 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-16 14:09+0100\n"
-"PO-Revision-Date: 2015-03-16 14:13+0100\n"
+"POT-Creation-Date: 2015-03-16 16:14+0100\n"
+"PO-Revision-Date: 2015-03-16 16:15+0100\n"
 "Last-Translator: GURY <jeanbaptiste.gury@gmail.com>\n"
 "Language-Team: French team <garthylou@gmx.com>\n"
 "Language: \n"
@@ -23,7 +23,8 @@ msgstr "image"
 
 #: aroe/models.py:25
 #: aroe/templates/aroe/admin/trainings_management.html:55
-#: aroe/templates/aroe/admin/trainings_management.html:113
+#: aroe/templates/aroe/admin/trainings_management.html:114
+#: aroe/templates/aroe/training_page.html:34
 #: aroeapi/models.py:34
 msgid "Title"
 msgstr "Titre"
@@ -137,47 +138,49 @@ msgstr "Sauver"
 
 #: aroe/templates/aroe/admin/membres_management.html:134
 #: aroe/templates/aroe/admin/trainings_management.html:99
-#: aroe/templates/aroe/admin/trainings_management.html:118
+#: aroe/templates/aroe/admin/trainings_management.html:119
 msgid "Cancel"
 msgstr "Annuler"
 
 #: aroe/templates/aroe/admin/trainings_management.html:4
-#| msgid "Members management"
 msgid "Trainings management"
 msgstr "Gestion des stages"
 
 #: aroe/templates/aroe/admin/trainings_management.html:37
-#| msgid "Members managements"
 msgid "Trainings managements"
 msgstr "Gestion des stages"
 
 #: aroe/templates/aroe/admin/trainings_management.html:60
+#: aroe/templates/aroe/training_page.html:39
 #: aroeapi/models.py:37
-#| msgid "Association"
 msgid "Description"
 msgstr "Description"
 
 #: aroe/templates/aroe/admin/trainings_management.html:65
+#: aroe/templates/aroe/training_page.html:44
 #: aroeapi/models.py:38
 msgid "Responsible"
 msgstr "Responsable"
 
 #: aroe/templates/aroe/admin/trainings_management.html:69
+#: aroe/templates/aroe/training_page.html:48
 #: aroeapi/models.py:39
 msgid "Intervenant"
 msgstr "Intervenant"
 
 #: aroe/templates/aroe/admin/trainings_management.html:73
+#: aroe/templates/aroe/training_page.html:52
 msgid "Total seats"
 msgstr "Places totales"
 
 #: aroe/templates/aroe/admin/trainings_management.html:77
+#: aroe/templates/aroe/training_page.html:56
 msgid "Reserved seats"
 msgstr "Places réservées"
 
 #: aroe/templates/aroe/admin/trainings_management.html:81
+#: aroe/templates/aroe/training_page.html:60
 #: aroeapi/models.py:42
-#| msgid "Association"
 msgid "Location"
 msgstr "Lieu"
 
@@ -185,24 +188,28 @@ msgstr "Lieu"
 msgid "New training"
 msgstr "Nouveau stage"
 
-#: aroe/templates/aroe/admin/trainings_management.html:111
+#: aroe/templates/aroe/admin/trainings_management.html:112
 msgid "From "
 msgstr "Du "
 
-#: aroe/templates/aroe/admin/trainings_management.html:112
+#: aroe/templates/aroe/admin/trainings_management.html:113
 msgid " to "
 msgstr " au "
 
-#: aroe/templates/aroe/admin/trainings_management.html:117
+#: aroe/templates/aroe/admin/trainings_management.html:118
 msgid "OK"
 msgstr "OK"
+
+#: aroe/templates/aroe/home_page.html:107
+#| msgid "New training"
+msgid "No scheduled training"
+msgstr "Pas de stage prévu"
 
 #: aroe/wagtail_hooks.py:30
 msgid "Members Management"
 msgstr "Gestion des membres"
 
 #: aroe/wagtail_hooks.py:49
-#| msgid "Members management"
 msgid "Training management"
 msgstr "Gestion des stages"
 

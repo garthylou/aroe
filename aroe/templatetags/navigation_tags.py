@@ -3,6 +3,7 @@ from django import template
 from aroe.models import *
 
 
+
 register = template.Library()
 
 
