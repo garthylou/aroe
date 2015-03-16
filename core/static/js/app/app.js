@@ -33,6 +33,7 @@ aroeApp.run(['$http', '$cookies', function ($http, $cookies) {
 var aroeFrontendApp = angular.module('aroeFrontEnd', [
 	'ngCookies',
 	'aroeMembers',
+	'aroeTrainings',
 ]);
 
 aroeFrontendApp.config(function ($interpolateProvider) {
@@ -165,4 +166,37 @@ $(document).ready(function() {
    			},
     	});
 	}
+
+
+
+
+	if ($('#calendarDisplay').fullCalendar) {
+
+    	$('#calendarDisplay').fullCalendar({
+        // put your options and callbacks here
+        	selectable: true,
+			events: '/api/trainings',
+			eventClick: function(calEvent, jsEvent, view) {
+				if($('#calendarDisplay').data("lastClick"))
+				{
+					// Reset the background color to identify the selection
+        			$('#calendarDisplay').data("lastClick").backgroundColor = '#3b91ad';
+        			$('#calendarDisplay').fullCalendar('updateEvent', $('#calendarDisplay').data("lastClick") );
+				}
+				$('#calendarDisplay').data("lastClick", calEvent);
+
+				// change the background color to identify the selection
+        		calEvent.backgroundColor = '#088A08';
+        		$('#calendarDisplay').fullCalendar('updateEvent', calEvent);
+        		
+        		// Update the angular model and apply modification.
+				$('[ng-controller="TrainingCtrl"]').scope().training = calEvent;
+				$('[ng-controller="TrainingCtrl"]').scope().$apply();
+				// Do not load the url of the event (change the default behavior of fullcalendar.)
+				return false;
+   			},
+    	});
+	}
+
+
 	});

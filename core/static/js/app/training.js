@@ -69,3 +69,16 @@ var ModalTrainingNewCtrl = function($scope, $modalInstance, start, end) {
     	$modalInstance.dismiss('cancel');
     }
 };
+
+
+
+/* Front End controller */
+
+
+var trainings = angular.module('aroeTrainings', []);
+
+members.controller('TrainingCtrl', ['$scope', '$filter', '$http', 
+                                function($scope, $filter, $http) {
+
+  $scope.training = null;
+}]);

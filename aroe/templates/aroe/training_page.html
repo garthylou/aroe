@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% load static core_tags %}
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+{% load navigation_tags %}
+{% load i18n %}
+{% load compress %}
+
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
+{% block extra_css %}
+	{% compress css %}
+	<link rel="stylesheet" href="{{ STATIC_URL}}bower_components/fullcalendar/dist/fullcalendar.css"/>
+	{% endcompress %}
+{% endblock %}
+
+{% block content %}
+
+	<!-- *****************************************************************************************************************
+	 TITLE & CONTENT
+	 ***************************************************************************************************************** -->
+
+	 <div class="container mt" xmlns:ng="http://angularjs.org" ng-app="aroeFrontEnd" ng-cloak>
+	 	<div class="row" ng-controller="TrainingCtrl">
+	 		<h3>{{self.title}}</h3>
+		 	<div class="col-md-12 col-lg-12">
+		 		<div class="row">
+		 			<div class="col-xs-12 col-md-7 col-lg-7">
+ 						<div id='calendarDisplay' class="calendar"></div>
+ 					</div>
+				 	<div class="col-xs-12 col-md-4 col-lg-4">
+				 		<div class="col-md-12 col-lg-12">
+					 		<h6>{%trans 'Title' %}</h6>
+					 		<span class="training-field">{$ training.title || '&nbsp;' $}
+			  				</span>
+					 	</div>
+				 		<div class="col-md-6 col-lg-6">
+				 			<h6>{%trans 'Description' %}</h6>
+				 			<span class="training-field">{$ training.description || '&nbsp;\n&nbsp;' $}
+		  					</span>
+				 		</div>
+				 		<div class="col-md-6 col-lg-6">
+				 			<h6>{% trans 'Responsible' %}</h6>
+				 			<span class="training-field">{$ training.responsible || '&nbsp;' $}</span>
+				 		</div>
+				 		<div class="col-md-12 col-lg-12">
+				 			<h6>{% trans 'Intervenant' %}</h6>
+				 			<span class="training-field">{$ training.intervenant || '&nbsp;' $}</span>
+				 		</div>
+				 		<div class="col-md-6 col-lg-6">
+				 			<h6>{% trans 'Total seats' %}</h6>
+				 			<span class="training-field">{$ training.seats || '&nbsp;' $}</span>
+				 		</div>
+				 		<div class="col-md-6 col-lg-6">
+				 			<h6>{% trans 'Reserved seats' %}</h6>
+				 			<span class="training-field">{$ training.occupied_seats || '&nbsp;' $}</span>
+				 		</div>
+				 		<div class="col-md-12 col-lg-12">
+				 			<h6>{% trans 'Location' %}</h6>
+				 			<span class="training-field">{$ training.location || '&nbsp;' $}</span>
+				 		</div>
+				 	</div>
+		 		</div>
+		 	</div>
+	 	</div><!--/row -->
+	 </div><!--/container -->
+{% endblock %}
+
+{% block extra_js %}
+{% compress js %}
+<script src="{{STATIC_URL}}bower_components/angular/angular.min.js"></script>
+<script src="{{STATIC_URL}}bower_components/angular-cookies/angular-cookies.min.js"></script>
+<script src='{{STATIC_URL}}bower_components/moment/min/moment.min.js'></script>
+<script src='{{STATIC_URL}}bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
+<script src='{{STATIC_URL}}bower_components/fullcalendar/dist/lang/fr.js'></script>
+<script src="{{ STATIC_URL}}js/app/members.js"></script>
+<script src="{{ STATIC_URL}}js/app/training.js"></script>
+<script src="{{ STATIC_URL}}js/app/app.js"></script>
+{% endcompress %}
+{% endblock %}
