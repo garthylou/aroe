@@ -17,3 +17,7 @@ class MembersViewSet(viewsets.ModelViewSet):
 class AvatarMemberViewSet(viewsets.ModelViewSet):
 	queryset = models.Member.objects.all()
 	serializer_class = serializers.AvatarMemberSerializer
+
+class TrainingViewSet(viewsets.ModelViewSet):
+	queryset = models.Training.objects.all()
+	serializer_class = serializers.TrainingSerializer

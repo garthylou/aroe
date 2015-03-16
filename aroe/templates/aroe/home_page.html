@@ -32,7 +32,7 @@
 				  	{% for carousel_item in self.carousel_items.all %}
 				    <div class="item{% if forloop.first %} active{% endif %}">
 				    	{% image carousel_item.image width-1000 as carouselimagedata %}
-				      <img src="{{ carouselimagedata.url }}" style="width: 100%; min-height: {{ carouselimagedata.height }}px;" alt="{{ carouselimagedata.alt }}">
+				      <img src="{{ carouselimagedata.url }}"  alt="{{ carouselimagedata.alt }}">
 				      <div class="carousel-caption">
 						<h3>{{ carousel_item.caption }}</h3>
 					  </div>

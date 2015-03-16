@@ -6,3 +6,4 @@ from aroeapi import views
 routerapi = routers.SimpleRouter(trailing_slash = False)
 routerapi.register(r'members', views.MembersViewSet)
 routerapi.register(r'avatars', views.AvatarMemberViewSet)
+routerapi.register(r'trainings', views.TrainingViewSet)

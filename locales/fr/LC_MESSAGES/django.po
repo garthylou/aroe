@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AROE 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-13 09:24+0100\n"
-"PO-Revision-Date: 2015-03-13 09:28+0100\n"
+"POT-Creation-Date: 2015-03-16 14:09+0100\n"
+"PO-Revision-Date: 2015-03-16 14:13+0100\n"
 "Last-Translator: GURY <jeanbaptiste.gury@gmail.com>\n"
 "Language-Team: French team <garthylou@gmx.com>\n"
 "Language: \n"
@@ -22,6 +22,9 @@ msgid "image"
 msgstr "image"
 
 #: aroe/models.py:25
+#: aroe/templates/aroe/admin/trainings_management.html:55
+#: aroe/templates/aroe/admin/trainings_management.html:113
+#: aroeapi/models.py:34
 msgid "Title"
 msgstr "Titre"
 
@@ -66,72 +69,142 @@ msgid "Members managements"
 msgstr "Gestion des membres"
 
 #: aroe/templates/aroe/admin/membres_management.html:51
-#: aroe/templates/aroe/membres_page.html:23
+#: aroe/templates/aroe/membres_page.html:24
 msgid "Filter"
 msgstr "Filtre"
 
-#: aroe/templates/aroe/admin/membres_management.html:85
+#: aroe/templates/aroe/admin/membres_management.html:76
+msgid "Clear avatar"
+msgstr "Supprimer avatar"
+
+#: aroe/templates/aroe/admin/membres_management.html:90
 msgid "Name"
 msgstr "Nom"
 
-#: aroe/templates/aroe/admin/membres_management.html:86
-#: aroe/templates/aroe/admin/membres_management.html:92
+#: aroe/templates/aroe/admin/membres_management.html:91
 #: aroe/templates/aroe/admin/membres_management.html:97
-#: aroe/templates/aroe/admin/membres_management.html:101
-#: aroe/templates/aroe/admin/membres_management.html:105
-#: aroe/templates/aroe/admin/membres_management.html:109
-#: aroe/templates/aroe/admin/membres_management.html:113
+#: aroe/templates/aroe/admin/membres_management.html:102
+#: aroe/templates/aroe/admin/membres_management.html:106
+#: aroe/templates/aroe/admin/membres_management.html:110
+#: aroe/templates/aroe/admin/membres_management.html:114
+#: aroe/templates/aroe/admin/membres_management.html:118
 msgid "Empty"
 msgstr "N/A"
 
-#: aroe/templates/aroe/admin/membres_management.html:91
+#: aroe/templates/aroe/admin/membres_management.html:96
 msgid "Firstname"
 msgstr "Prénom"
 
-#: aroe/templates/aroe/admin/membres_management.html:96
+#: aroe/templates/aroe/admin/membres_management.html:101
 #: aroeapi/models.py:22
 msgid "Address"
 msgstr "Adresse"
 
-#: aroe/templates/aroe/admin/membres_management.html:100
+#: aroe/templates/aroe/admin/membres_management.html:105
 #: aroeapi/models.py:23
 msgid "Zipcode"
 msgstr "Code postal"
 
-#: aroe/templates/aroe/admin/membres_management.html:104
+#: aroe/templates/aroe/admin/membres_management.html:109
 #: aroeapi/models.py:24
 msgid "City"
 msgstr "Ville"
 
-#: aroe/templates/aroe/admin/membres_management.html:108
+#: aroe/templates/aroe/admin/membres_management.html:113
 #: aroeapi/models.py:25
 msgid "Phone"
 msgstr "Téléphone"
 
-#: aroe/templates/aroe/admin/membres_management.html:112
+#: aroe/templates/aroe/admin/membres_management.html:117
 #: aroeapi/models.py:26
 msgid "Email"
 msgstr "Email"
 
-#: aroe/templates/aroe/admin/membres_management.html:118
+#: aroe/templates/aroe/admin/membres_management.html:123
+#: aroe/templates/aroe/admin/trainings_management.html:88
 msgid "Edit"
 msgstr "Éditer"
 
-#: aroe/templates/aroe/admin/membres_management.html:121
+#: aroe/templates/aroe/admin/membres_management.html:126
+#: aroe/templates/aroe/admin/trainings_management.html:91
 msgid "Delete"
 msgstr "Effacer"
 
-#: aroe/templates/aroe/admin/membres_management.html:126
+#: aroe/templates/aroe/admin/membres_management.html:131
+#: aroe/templates/aroe/admin/trainings_management.html:96
 msgid "Save"
 msgstr "Sauver"
 
-#: aroe/templates/aroe/admin/membres_management.html:129
+#: aroe/templates/aroe/admin/membres_management.html:134
+#: aroe/templates/aroe/admin/trainings_management.html:99
+#: aroe/templates/aroe/admin/trainings_management.html:118
 msgid "Cancel"
 msgstr "Annuler"
 
-#: aroe/wagtail_hooks.py:43
+#: aroe/templates/aroe/admin/trainings_management.html:4
+#| msgid "Members management"
+msgid "Trainings management"
+msgstr "Gestion des stages"
+
+#: aroe/templates/aroe/admin/trainings_management.html:37
+#| msgid "Members managements"
+msgid "Trainings managements"
+msgstr "Gestion des stages"
+
+#: aroe/templates/aroe/admin/trainings_management.html:60
+#: aroeapi/models.py:37
+#| msgid "Association"
+msgid "Description"
+msgstr "Description"
+
+#: aroe/templates/aroe/admin/trainings_management.html:65
+#: aroeapi/models.py:38
+msgid "Responsible"
+msgstr "Responsable"
+
+#: aroe/templates/aroe/admin/trainings_management.html:69
+#: aroeapi/models.py:39
+msgid "Intervenant"
+msgstr "Intervenant"
+
+#: aroe/templates/aroe/admin/trainings_management.html:73
+msgid "Total seats"
+msgstr "Places totales"
+
+#: aroe/templates/aroe/admin/trainings_management.html:77
+msgid "Reserved seats"
+msgstr "Places réservées"
+
+#: aroe/templates/aroe/admin/trainings_management.html:81
+#: aroeapi/models.py:42
+#| msgid "Association"
+msgid "Location"
+msgstr "Lieu"
+
+#: aroe/templates/aroe/admin/trainings_management.html:108
+msgid "New training"
+msgstr "Nouveau stage"
+
+#: aroe/templates/aroe/admin/trainings_management.html:111
+msgid "From "
+msgstr "Du "
+
+#: aroe/templates/aroe/admin/trainings_management.html:112
+msgid " to "
+msgstr " au "
+
+#: aroe/templates/aroe/admin/trainings_management.html:117
+msgid "OK"
+msgstr "OK"
+
+#: aroe/wagtail_hooks.py:30
 msgid "Members Management"
 msgstr "Gestion des membres"
+
+#: aroe/wagtail_hooks.py:49
+#| msgid "Members management"
+msgid "Training management"
+msgstr "Gestion des stages"
 
 #: aroeapi/models.py:20
 msgid "Family name"
@@ -144,4 +217,25 @@ msgstr "Prénom"
 #: aroeapi/models.py:27
 msgid "Photo"
 msgstr "Photo"
+
+#: aroeapi/models.py:35
+msgid "Start"
+msgstr "Début"
+
+#: aroeapi/models.py:36
+msgid "End"
+msgstr "Fin"
+
+#: aroeapi/models.py:40
+#: aroeapi/models.py:41
+msgid "Seats"
+msgstr "Places"
+
+#: core/templates/404.html:6
+msgid "Page not found"
+msgstr "Page non trouvée"
+
+#: core/templates/404.html:8
+msgid "Sorry, this page could not be found."
+msgstr "Désolé, cette page n'a pu être trouvée"
 

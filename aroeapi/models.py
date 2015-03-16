@@ -28,3 +28,15 @@ class Member(models.Model):
 
 	def __unicode__(self):
 		return "{0} {1} {2}".format( self.family_name, self.firstname, self.zipcode )
+
+
+class Training(models.Model):
+	title = models.CharField(_('Title'), max_length=200)
+	start = models.DateField(_('Start'))
+	end = models.DateField(_('End'),blank=True, null=True)
+	description = models.TextField(_('Description'), blank=True, null=True)
+	responsible = models.CharField(_('Responsible'), max_length=200, blank=True, null=True)
+	intervenant = models.CharField(_('Intervenant'), max_length=250, blank=True, null=True)
+	seats = models.PositiveIntegerField(_('Seats'),blank=True, null=True)
+	occupied_seats = models.PositiveIntegerField(_('Seats'), blank=True, null=True)
+	location = models.CharField(_('Location'), max_length=300, blank=True, null=True)

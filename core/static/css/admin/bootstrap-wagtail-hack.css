@@ -43,4 +43,17 @@ label {
 
 button {
     height:initial;
+    transition : initial;
+    text-transform : initial;
+}
+button:hover {
+    background-color: #e6e6e6;
+    border-color : inherit;
+    color : inherit;
+}
+
+button:disabled {
+    background-color: inherit;
+    border-color : inherit;
+    color : inherit;
 }

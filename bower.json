@@ -11,12 +11,13 @@
     "angular-animate": "1.2.x",
     "angular-loader": "1.2.x",
     "angular-resource": "1.2.x",
-    "angular-xeditable": "0.1.x",
+    "angular-xeditable": "latest",
     "angular-cookies": "1.2.x",
     "angular-i18n": "1.2.x",
-    "angular-bootstrap": "0.9.x",
+    "angular-bootstrap": "latest",
     "angular-loading-bar": "0.6.x",
     "webshim": "1.15.x",
-    "ng-file-upload": "latest"
+    "ng-file-upload": "latest",
+    "fullcalendar": "latest"
   }
 }

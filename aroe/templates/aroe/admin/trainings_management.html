@@ -1,0 +1,146 @@
+{% extends "wagtailadmin/base.html" %}
+{% load i18n %}
+{% load gravatar compress %}
+{% block titletag %}{% trans "Trainings management" %}{% endblock %}
+{% block bodyclass %}homepage{% endblock %}
+
+
+{% block css %}
+    {% compress css %}
+        <link rel="stylesheet" href="{{ STATIC_URL }}wagtailadmin/scss/vendor/jquery-ui/jquery-ui-1.10.3.verdant.css" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="{{ STATIC_URL }}wagtailadmin/scss/core.scss" type="text/x-scss" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/admin/bootstrap-wagtail-hack.css" type="text/x-scss" />
+    {% endcompress %}
+
+    {% block extra_css %}
+		{% compress css %}
+		<link rel="stylesheet" href="{{ STATIC_URL}}bower_components/angular-xeditable/dist/css/xeditable.css"/>
+		<link rel="stylesheet" href="{{ STATIC_URL }}wagtailadmin/scss/layouts/home.scss" type="text/x-scss" />
+		<link rel="stylesheet" href="{{ STATIC_URL }}css/admin/aroe-admin.css" type="text/css" />
+		<link rel="stylesheet" href="{{ STATIC_URL}}bower_components/fullcalendar/dist/fullcalendar.css"/>
+		{% endcompress %}
+	{% endblock %}
+{% endblock %}
+
+
+
+{% block content %}
+<header class="merged nice-padding">
+<div class="row row-flush">
+{% if user.email %}
+<div class="col1">
+<div class="avatar icon icon-user"><img src="{% gravatar_url user.email %}" /></div>
+</div>
+{% endif %}
+<div class="col9">
+<h1>{% block branding_welcome %}{% blocktrans %}Trainings managements{% endblocktrans %}{% endblock %}</h1>
+</div>
+</div>
+</header>
+{% if panels %}
+{% for panel in panels %}
+{{ panel.render }}
+{% endfor %}
+{% else %}
+<div xmlns:ng="http://angularjs.org"  ng-app="aroe" ng-cloak>
+ <div class="container" ng-controller="TrainingCtrl">
+ 	<div class="row">
+		<div class="col-xs-12 col-md-7 col-lg-7">
+ 			<div id='calendar' class="calendar"></div>
+ 		</div>
+	 	<div class="col-xs-12 col-md-4 col-lg-4">
+	 		<form editable-form name="editableForm" onaftersave="saveTraining(training)" class="form-inline">
+	 			<div class="col-md-12 col-lg-12">
+		 			<h6>{%trans 'Title' %}</h6>
+		 			<span class="training-field" e-required editable-text="training.title">{$ training.title || '&nbsp;' $}
+  					</span>
+		 		</div>
+		 		<div class="col-md-6 col-lg-6">
+		 			<h6>{%trans 'Description' %}</h6>
+		 			<span class="training-field" editable-textarea="training.description" e-rows="2" e-cols="20">{$ training.description || '&nbsp;\n&nbsp;' $}
+  					</span>
+		 		</div>
+		 		<div class="col-md-6 col-lg-6">
+		 			<h6>{% trans 'Responsible' %}</h6>
+		 			<span class="training-field" editable-text="training.responsible">{$ training.responsible || '&nbsp;' $}</span>
+		 		</div>
+		 		<div class="col-md-12 col-lg-12">
+		 			<h6>{% trans 'Intervenant' %}</h6>
+		 			<span class="training-field" editable-text="training.intervenant">{$ training.intervenant || '&nbsp;' $}</span>
+		 		</div>
+		 		<div class="col-md-6 col-lg-6">
+		 			<h6>{% trans 'Total seats' %}</h6>
+		 			<span class="training-field" editable-number="training.seats" e-min="0">{$ training.seats || '&nbsp;' $}</span>
+		 		</div>
+		 		<div class="col-md-6 col-lg-6">
+		 			<h6>{% trans 'Reserved seats' %}</h6>
+		 			<span class="training-field" editable-number="training.occupied_seats" e-min="0">{$ training.occupied_seats || '&nbsp;' $}</span>
+		 		</div>
+		 		<div class="col-md-12 col-lg-12">
+		 			<h6>{% trans 'Location' %}</h6>
+		 			<span class="training-field" editable-text="training.location">{$ training.location || '&nbsp;' $}</span>
+		 		</div>
+		 		<div class="col-md-12 col-lg-12"></div>
+		 		<div class="col-md-12 col-lg-12 buttons">
+			      <!-- button to show form -->
+			      <button type="button" class="btn btn-default" ng-click="editableForm.$show()" ng-show="!editableForm.$visible && training != null">
+			        {% trans 'Edit' %}
+			      </button>
+			      <button type="button" class="btn btn-danger" ng-click="delete(training)" ng-show="!editableForm.$visible && training != null">
+			        {% trans 'Delete' %}
+			      </button>
+			      <!-- buttons to submit / cancel form -->
+			      <span ng-show="editableForm.$visible">
+			        <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting || editableForm.$invalid">
+			          {% trans 'Save' %}
+			        </button>
+			        <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+			          {% trans 'Cancel' %}
+			        </button>
+			      </span>
+			    </div>
+		 	</form>
+	 	</div>
+ 	</div>
+ 	<script id="modalTrainingNew.html" type="text/ng-template">
+ 	    <div class="modal-header">
+            <h3 class="modal-title">{% trans 'New training' %}</h3>
+        </div>
+        <form novalidate name="form">
+        <div class="modal-body">
+           {% trans 'From '%}<span>{$ newTraining.start | date : 'longDate' $}</span>
+           <span ng-if='newTraining.end != null'>{%trans ' to '%} {$ newTraining.end | date : 'longDate' $}</span><br/>
+           	<label for="title">{%trans 'Title' %}</label>
+           	<input id="title" name="title" type="text" required ng-model="newTraining.title">
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-disabled="form.$invalid" ng-click="ok()">{% trans 'OK'%}</button>
+            <button class="btn btn-warning" ng-click="cancel()">{% trans 'Cancel'%}</button>
+        </div>
+        </form>
+ 	</script>
+</div>
+</div>
+{% endif %}
+{% endblock %}
+
+
+{% block extra_js %}
+{% compress js %}
+<script src="{{STATIC_URL}}bower_components/jquery/dist/jquery.min.js"></script>
+<script src="{{STATIC_URL}}bower_components/angular/angular.min.js"></script>
+<script src="{{STATIC_URL}}bower_components/angular-i18n/angular-locale_fr-fr.js"></script>
+<script src="{{STATIC_URL}}bower_components/angular-cookies/angular-cookies.min.js"></script>
+<script src="{{STATIC_URL}}bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="{{STATIC_URL}}bower_components/angular-xeditable/dist/js/xeditable.min.js"></script>
+<script src="{{STATIC_URL}}bower_components/ng-file-upload/angular-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
+<script src="{{STATIC_URL}}bower_components/ng-file-upload/angular-file-upload.min.js"></script> 
+<script src='{{STATIC_URL}}bower_components/moment/min/moment.min.js'></script>
+<script src='{{STATIC_URL}}bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
+<script src='{{STATIC_URL}}bower_components/fullcalendar/dist/lang/fr.js'></script>
+<script src="{{ STATIC_URL}}js/app/members.js"></script>
+<script src="{{ STATIC_URL}}js/app/training.js"></script>
+<script src="{{ STATIC_URL}}js/app/app.js"></script>
+{% endcompress %}
+{% endblock %}
