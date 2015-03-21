@@ -8,7 +8,7 @@ register = template.Library()
 @register.assignment_tag(takes_context=True)
 def next_training(context):
 	request = context['request']
-	training_list = Training.objects.filter(start__gte=datetime.date.today())
+	training_list = Training.objects.filter(start__gte=datetime.date.today())[:5]
 	return training_list
 
 @register.filter
