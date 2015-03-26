@@ -32,11 +32,20 @@ class CarouselItem(models.Model):
 
 # Home page
 class HomePage(Page):
-    news = RichTextField(blank=True,verbose_name="News",help_text=_("Text to put into the News part on Home."))
-    search_fields = Page.search_fields + (
+	subpage_types = [
+		'aroe.AssociationRootPage',
+		'aroe.DossierPage',
+		'aroe.SimplePage',
+		'aroe.PressbookPage',
+	]
+	news = RichTextField(
+		blank=True,
+		verbose_name="News",
+		help_text=_("Text to put into the News part on Home."))
+	search_fields = Page.search_fields + (
 		index.SearchField('news'),
 	)
-    class Meta:
+	class Meta:
 		verbose_name = _("Home")
 
 class HomePageCarouselItem(Orderable, CarouselItem):
@@ -105,3 +114,113 @@ class MembresPage(AssociationTilePage):
 
 class TrainingPage(AssociationTilePage):
 	pass
+
+
+# Dossier and Article
+
+class DossierImageItem(Orderable, models.Model):
+	image = models.ForeignKey(
+		'wagtailimages.Image',
+		null=True,
+		blank=True,
+		on_delete=models.SET_NULL,
+		related_name='+',
+		verbose_name=_('image')
+	)
+	caption = models.CharField(verbose_name=_("Title"), max_length=255, blank=True)
+	panels = [
+		ImageChooserPanel('image', ),
+		FieldPanel('caption',),
+	]
+	page = ParentalKey('aroe.DossierPage', related_name='image_items')
+
+class DossierPage(Page):
+	subpage_types = [
+		'aroe.ArticlePage',
+		'aroe.DossierPage'
+	]
+	text_content = RichTextField(blank=True,verbose_name="Introduction",help_text=_("Introduce the content of the Dossier."))
+	class Meta:
+		verbose_name = _('Dossier')
+
+DossierPage.content_panels = [
+	FieldPanel('title', classname="full title"),
+	FieldPanel('text_content', classname="full"),
+	InlinePanel(DossierPage, 'image_items', label="Images"),
+]
+
+class ArticleImageItem(Orderable, models.Model):
+	image = models.ForeignKey(
+		'wagtailimages.Image',
+		null=True,
+		blank=True,
+		on_delete=models.SET_NULL,
+		related_name='+',
+		verbose_name=_('image')
+	)
+	caption = models.CharField(verbose_name=_("Title"), max_length=255, blank=True)
+	panels = [
+		ImageChooserPanel('image', ),
+		FieldPanel('caption',),
+	]
+	page = ParentalKey('aroe.ArticlePage', related_name='image_items')
+
+
+class ArticlePage(Page):
+	text_content = RichTextField(blank=True,verbose_name="Content",help_text=_("Content of the article."))
+	class Meta:
+		verbose_name = _('Article')
+
+ArticlePage.content_panels = [
+	FieldPanel('title', classname="full title"),
+	FieldPanel('text_content', classname="full"),
+	InlinePanel(ArticlePage, 'image_items', label="Images"),
+]
+
+
+## Simple Page
+class SimplePage(Page):
+	text = RichTextField(blank=True,verbose_name="Text",help_text=_("Text"))
+	class Meta:
+		verbose_name = _('Simple page')
+
+## PressBook Page
+class PressbookPage(Page):
+	subpage_types = [
+		'aroe.PressbookArticlePage',
+	]
+	class Meta:
+		verbose_name = _('Pressbook page')
+
+class PressbookArticlePage(Page):
+	text = RichTextField(blank=True,verbose_name="Text",help_text=_("Text"))
+	image = models.ForeignKey(
+		'wagtailimages.Image',
+		null=True,
+		blank=True,
+		on_delete=models.SET_NULL,
+		related_name='+',
+		verbose_name=_('image')
+	)
+	source = models.CharField(verbose_name=_("Source"), max_length=255, blank=True)
+	detail = models.CharField(verbose_name=_("Source detail"), max_length=255, blank=True)
+	icon_source = models.ForeignKey(
+		'wagtailimages.Image',
+		null=True,
+		blank=True,
+		on_delete=models.SET_NULL,
+		related_name='+',
+		verbose_name=_('icon')
+	)
+	class Meta:
+		verbose_name = _('article for pressbook')
+
+PressbookArticlePage.content_panels = [
+		FieldPanel('title', classname="full title"),
+		ImageChooserPanel('icon_source', ),
+		FieldPanel('source',),
+		FieldPanel('detail',),
+		ImageChooserPanel('image', ),
+		FieldPanel('text', classname="full"),
+
+	]

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% load static core_tags %}
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+{% load navigation_tags %}
+
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
+{% block content %}
+
+	<!-- *****************************************************************************************************************
+	 TITLE & CONTENT
+	 ***************************************************************************************************************** -->
+
+	 <div class="container mt">
+	 	<div class="row">
+		 	<div class="col-md-2 col-lg-2">
+		 		<h4>{{self.title}}</h4>
+		 		<div class="hline"></div>
+		 		{% dossier_menu as dossiermenu%}
+
+		 		<ul class="category-navigation">
+		 			{% for menuitem in articleitems %}
+		 			<li><a class="entry-navigation" href="{%pageurl menuitem%}">{{menuitem.title}}</a></li>
+		 			{% endfor %}
+		 			{% if dossieritems.all|length > 0 and articleitems.all|length > 0 %}
+		 			<li><div class="separator"></div></li>
+		 			{% endif %}
+		 			{% for dossieritem in dossieritems %}
+		 			<li><a class="entry-navigation" href="{%pageurl dossieritem%}">{{dossieritem.title}}</a></li>
+		 			{%endfor%}
+		 		</ul>
+		 	</div>
+		 	<div class="col-md-10 col-lg-10">
+		 		<div class="row">
+		 			{% if self.image_items.all|length > 0 %}
+		 			{% for image_item in self.image_items.all %}
+
+		 			<div class="{{self.image_items.all|determine_dossier_class}}">
+		 				<div class="thumbnail">
+		 					{% image image_item.image max-250x250 as imagedata %}
+		 					<img src="{{ imagedata.url }}">
+		 				</div>
+		 			</div>
+		 			{% endfor %}
+		 			{% endif %}
+		 			<div class="col-md-12 col-lg-12">
+		 				{% if self.text_content|striptags|length > 0 %}
+		 				<h3>{{self.title}}</h3>
+		 				<p>
+		 					{{ self.text_content|richtext}}
+		 				</p>
+		 				{%endif%}
+		 			</div>
+		 		</div>
+		 	</div>
+	 	</div><!--/row -->
+	 </div><!--/container -->
+
+	 
+{% endblock %}

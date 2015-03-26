@@ -155,6 +155,8 @@ LOGIN_REDIRECT_URL = 'wagtailadmin_home'
 
 WAGTAIL_SITE_NAME = "aroeweb"
 
+PASSWORD_REQUIRED_TEMPLATE = 'aroe/password_required.html'
+
 # Use Elasticsearch as the search backend for extra performance and better search results:
 # http://wagtail.readthedocs.org/en/latest/howto/performance.html#search
 # http://wagtail.readthedocs.org/en/latest/core_components/search/backends.html#elasticsearch-backend

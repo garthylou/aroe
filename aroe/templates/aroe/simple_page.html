@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% load static core_tags %}
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+{% load navigation_tags %}
+
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
+{% block content %}
+
+	<!-- *****************************************************************************************************************
+	 TITLE & CONTENT
+	 ***************************************************************************************************************** -->
+
+	 <div class="container mt">
+	 	<div class="row">
+		 	<div class="col-md-12 col-lg-12">
+		 		<h3>{{self.title}}</h3>
+		 		<p>
+		 		{{ self.text_content|richtext}}
+		 		</p>
+		 	</div>
+	 	</div><!--/row -->
+	 </div><!--/container -->
+
+	 
+{% endblock %}
