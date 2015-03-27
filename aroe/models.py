@@ -193,7 +193,7 @@ class PressbookPage(Page):
 		verbose_name = _('Pressbook page')
 
 class PressbookArticlePage(Page):
-	text = RichTextField(blank=True,verbose_name="Text",help_text=_("Text"))
+	text = RichTextField(blank=False,verbose_name="Text",help_text=_("Text"))
 	image = models.ForeignKey(
 		'wagtailimages.Image',
 		null=True,
@@ -202,24 +202,25 @@ class PressbookArticlePage(Page):
 		related_name='+',
 		verbose_name=_('image')
 	)
-	source = models.CharField(verbose_name=_("Source"), max_length=255, blank=True)
-	detail = models.CharField(verbose_name=_("Source detail"), max_length=255, blank=True)
+	source = models.CharField(verbose_name=_("Source"), max_length=255,help_text=_("Title of the source"))
+	detail = models.CharField(verbose_name=_("Source detail"), max_length=255, help_text=_("Detail of the source (publication date, # of the mag, ...)"))
 	icon_source = models.ForeignKey(
 		'wagtailimages.Image',
 		null=True,
-		blank=True,
+		blank=False,
 		on_delete=models.SET_NULL,
 		related_name='+',
-		verbose_name=_('icon')
+		verbose_name=_('icon'),
+		help_text=_('Icon of the source to display in pressbook.')
 	)
 	class Meta:
 		verbose_name = _('article for pressbook')
 
 PressbookArticlePage.content_panels = [
 		FieldPanel('title', classname="full title"),
-		ImageChooserPanel('icon_source', ),
-		FieldPanel('source',),
-		FieldPanel('detail',),
+		ImageChooserPanel('icon_source',),
+		FieldPanel('source', classname="full"),
+		FieldPanel('detail', classname="full"),
 		ImageChooserPanel('image', ),
 		FieldPanel('text', classname="full"),
 
