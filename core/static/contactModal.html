@@ -1,0 +1,18 @@
+                  <div class="modal-header">
+                    <button type="button" class="close" ng-click="cancel()" aria-label="Fermer"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="contactModalLabel">Contacter {$ accueil $}</h4>
+                  </div>
+                  <form novalidate name="form">
+                  <div class="modal-body">
+                        <div class="form-group">
+                        <label for="from-email" class="control-label">Votre email :</label>
+                        <input type="email" required="" class="form-control" id="from-email" ng-model="from">
+                        <label for="message-text" class="control-label">Message:</label>
+                        <textarea class="form-control" required="" id="message-text" rows="7" ng-model="message"></textarea>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="cancel()">Fermer</button>
+                    <button type="button" ng-disabled="form.$invalid" ng-click="ok()" class="btn btn-primary">Envoyer le message</button>
+                  </div>
+                </form>

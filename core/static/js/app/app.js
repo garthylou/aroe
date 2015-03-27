@@ -32,8 +32,13 @@ aroeApp.run(['$http', '$cookies', function ($http, $cookies) {
 
 var aroeFrontendApp = angular.module('aroeFrontEnd', [
 	'ngCookies',
+	'ui.bootstrap',
+	'angular-growl',
+	'ngAnimate',
+	'ngSanitize',
 	'aroeMembers',
 	'aroeTrainings',
+	'aroeContact',
 ]);
 
 aroeFrontendApp.config(function ($interpolateProvider) {
@@ -42,6 +47,16 @@ aroeFrontendApp.config(function ($interpolateProvider) {
 });
 
 
+aroeFrontendApp.run(['$http', '$cookies', function ($http, $cookies) {
+	$http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
+	$http.defaults.headers.put['X-CSRFToken'] = $cookies.csrftoken;
+	$http.defaults.headers.common['X-CSRFToken'] = $cookies.csrftoken;
+}]);
+
+aroeFrontendApp.config(['growlProvider', function(growlProvider) {
+	growlProvider.globalTimeToLive(10000);
+	growlProvider.onlyUniqueMessages(false);
+}]);
 
 
 

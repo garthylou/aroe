@@ -21,7 +21,7 @@ urlpatterns = patterns('',
 
     url(r'', include(wagtail_urls)),
     # REST API
-    url(r'^api/', include(routerapi.urls)),
+    url(r'^api/', include(routerapi)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

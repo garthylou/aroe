@@ -28,13 +28,16 @@
 		 					{% else %}
 		 					<img src="{{ STATIC_URL }}/images/avatar_silhouette-150x150.jpg"alt="Avatar {{poste_item.member.family_name}} {{poste_item.member.firstname}}">
 		 					{% endif %}
-		 					<div class="cartouche-poste">
+		 					<div class="cartouche-poste" ng-controller="ContactCtrl">
 			 					<address>
 			 						<strong>{{ poste_item.member.family_name }} {{poste_item.member.firstname}}</strong><br>	
 			 						{{ poste_item.member.address }}<br>
 			 						{{ poste_item.member.zipcode }} {{poste_item.member.city }}<br>
 			 						{{ poste_item.member.phone }}
 			 					</address>
+			 					{% if poste_item.member.email %}
+			 					<button class="btn btn-default btn-xs" ng-click="openContact({{poste_item.member.id}}, '{{ poste_item.member.family_name }} {{poste_item.member.firstname}}')">Contacter</button>
+			 					{%endif%}
 			 				</div>
 		 				</div>
 		 				

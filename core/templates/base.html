@@ -18,6 +18,7 @@
              <!-- Bootstrap core CSS -->
             <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css">
             <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+            <link href="{{STATIC_URL}}css/angular-growl.min.css" rel="stylesheet">
 
             <!-- Custom styles for this template -->
             <link rel="stylesheet" type="text/css" href="{% static 'css/aroeweb.css' %}">
@@ -30,10 +31,10 @@
         {% endblock %}
     </head>
 
-    <body class="{% block body_class %}{% endblock %}">
+    <body class="{% block body_class %}{% endblock %}"  xmlns:ng="http://angularjs.org"  ng-app="aroeFrontEnd" ng-cloak>
         {% wagtailuserbar %}
             <!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar" ng-controller="ContactCtrl">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -58,7 +59,7 @@
           <ul class="nav navbar-nav">
             <li><a class="entry-menu" href="/pressbook/"><i class="fa fa-newspaper-o fa-3x"></i><br/>Press Book</a></li>
             <li><a class="entry-menu" href="/dossiers/"><i class="fa fa-folder-open-o fa-3x"></i><br/>Dossiers</a></li>
-            <li><a class="entry-menu" href="index.html"><i class="fa fa-envelope-o fa-3x"></i><br/>Contact</a></li>
+            <li><a class="entry-menu" href="#navbar" ng-click="openContact()"><i class="fa fa-envelope-o fa-3x"></i><br/>Contact</a></li>
             <li><a class="entry-menu" href="/espace-membre/"><i class="fa fa-user fa-3x"></i><br/>Accès Adhérent</a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -71,7 +72,7 @@
     <!-- *****************************************************************************************************************
      FOOTER
      ***************************************************************************************************************** -->
-     <div id="footerwrap">
+     <div id="footerwrap" ng-controller="ContactCtrl">
         <div class="container">
             <div class="row">
                 <div class="col-md-3 col-lg-3">
@@ -96,14 +97,17 @@
                 </div>
                 <div class="col-md-3 col-lg-3">
                     <h5><a href="/mentions-legales/">Mentions légales</a></h5>
-                    <h5><a href="#">Contact</a></h5>
+                    <h5><a href="#navbar" ng-click="openContact()">Contact</a></h5>
                 </div>
             </div><! --/row -->
             <div class="footer">
                 <p>&copy; {% now "Y" %} AROE Tous droits réservés.
             </div>
         </div><! --/container -->
+        <div growl>
+        </div>
      </div><! --/footerwrap -->
+
 
         {% block override_js %}
         {% endblock %}
@@ -127,6 +131,17 @@
             <script type="text/javascript" src="{% static 'js/jquery.prettyPhoto.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/jquery.isotope.min.js' %}"></script>
             
+            <script src="{{STATIC_URL }}bower_components/angular/angular.min.js"></script>
+            <script src="{{STATIC_URL }}bower_components/angular-cookies/angular-cookies.min.js"></script>
+            <script src="{{STATIC_URL}}bower_components/angular-i18n/angular-locale_fr-fr.js"></script>
+            <script src="{{STATIC_URL}}bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+            <script src="{{STATIC_URL}}bower_components/angular-animate/angular-animate.min.js"></script>
+            <script src="{{STATIC_URL}}bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+            <script src="{{STATIC_URL}}bower_components/angular-growl/build/angular-growl.js"></script>
+            <script src="{{ STATIC_URL }}js/app/contact.js"></script>
+            <script src="{{ STATIC_URL }}js/app/members.js"></script>
+            <script src="{{ STATIC_URL }}js/app/training.js"></script>
+            <script src="{{ STATIC_URL }}js/app/app.js"></script>
             <script type="text/javascript" src="{% static 'js/aroeweb.js' %}"></script>
         {% endcompress %}
 
