@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AROE 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-16 16:14+0100\n"
-"PO-Revision-Date: 2015-03-16 16:15+0100\n"
+"POT-Creation-Date: 2015-03-27 18:27+0100\n"
+"PO-Revision-Date: 2015-03-27 18:31+0100\n"
 "Last-Translator: GURY <jeanbaptiste.gury@gmail.com>\n"
 "Language-Team: French team <garthylou@gmx.com>\n"
 "Language: \n"
@@ -18,10 +18,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: aroe/models.py:23
+#: aroe/models.py:128
+#: aroe/models.py:159
+#: aroe/models.py:203
 msgid "image"
 msgstr "image"
 
 #: aroe/models.py:25
+#: aroe/models.py:130
+#: aroe/models.py:161
 #: aroe/templates/aroe/admin/trainings_management.html:55
 #: aroe/templates/aroe/admin/trainings_management.html:114
 #: aroe/templates/aroe/training_page.html:34
@@ -29,37 +34,94 @@ msgstr "image"
 msgid "Title"
 msgstr "Titre"
 
-#: aroe/models.py:35
+#: aroe/models.py:44
 msgid "Text to put into the News part on Home."
 msgstr "Texte à placer dans les Nouveautés en page d'accueil"
 
-#: aroe/models.py:40
+#: aroe/models.py:49
 msgid "Home"
 msgstr "Accueil"
 
-#: aroe/models.py:62
+#: aroe/models.py:71
 msgid "Association"
 msgstr "Association"
 
-#: aroe/models.py:65
+#: aroe/models.py:74
 msgid "Icon class"
 msgstr "Classe d'icône"
 
-#: aroe/models.py:65
+#: aroe/models.py:74
 msgid "Text which represents icon from http://fontawesome.io/icons/"
 msgstr "Texte qui représente une icône selon http://fontawesome.io/icons/"
 
-#: aroe/models.py:67
+#: aroe/models.py:76
 msgid "Association tile"
 msgstr "Tuile association"
 
-#: aroe/models.py:81
+#: aroe/models.py:90
 msgid "Member"
 msgstr "Membre"
 
-#: aroe/models.py:83
+#: aroe/models.py:92
 msgid "Caption"
 msgstr "Intitulé"
+
+#: aroe/models.py:142
+msgid "Introduce the content of the Dossier."
+msgstr "Introduit le contenu du dossier."
+
+#: aroe/models.py:144
+msgid "Dossier"
+msgstr "Dossier"
+
+#: aroe/models.py:170
+msgid "Content of the article."
+msgstr "Contenu de l'article."
+
+#: aroe/models.py:172
+msgid "Article"
+msgstr "Article"
+
+#: aroe/models.py:183
+#: aroe/models.py:196
+msgid "Text"
+msgstr "Texte"
+
+#: aroe/models.py:185
+msgid "Simple page"
+msgstr "Page simple"
+
+#: aroe/models.py:193
+msgid "Pressbook page"
+msgstr "Page pressbook"
+
+#: aroe/models.py:205
+msgid "Source"
+msgstr "Source"
+
+#: aroe/models.py:205
+msgid "Title of the source"
+msgstr "Titre de l'article"
+
+#: aroe/models.py:206
+msgid "Source detail"
+msgstr "Détail de la source"
+
+#: aroe/models.py:206
+msgid "Detail of the source (publication date, # of the mag, ...)"
+msgstr "Détail de la source (date de publication, numéro de magazine, etc.)"
+
+#: aroe/models.py:213
+msgid "icon"
+msgstr "icône"
+
+#: aroe/models.py:214
+msgid "Icon of the source to display in pressbook."
+msgstr "Icône de la source à afficher dans le pressbook."
+
+#: aroe/models.py:217
+msgid "article for pressbook"
+msgstr "article pour le pressbook"
 
 #: aroe/templates/aroe/admin/membres_management.html:4
 msgid "Members management"
@@ -200,8 +262,7 @@ msgstr " au "
 msgid "OK"
 msgstr "OK"
 
-#: aroe/templates/aroe/home_page.html:107
-#| msgid "New training"
+#: aroe/templates/aroe/home_page.html:108
 msgid "No scheduled training"
 msgstr "Pas de stage prévu"
 
@@ -237,6 +298,10 @@ msgstr "Fin"
 #: aroeapi/models.py:41
 msgid "Seats"
 msgstr "Places"
+
+#: aroeapi/views.py:51
+msgid "Your message has not been sent, because it does not work on this environment"
+msgstr "Votre message n'a pas été envoyé, car cela ne fonctionne pas sur cet environnement"
 
 #: core/templates/404.html:6
 msgid "Page not found"
