@@ -65,7 +65,8 @@ class AssociationRootPage(Page):
 		'aroe.AssociationTilePage',
 		'aroe.BureauPage',
 		'aroe.MembresPage',
-		'aroe.TrainingPage'
+		'aroe.TrainingPage',
+		'aroe.EmptyPage',
 	]
 	class Meta:
 		verbose_name = _('Association')
@@ -114,6 +115,17 @@ class MembresPage(AssociationTilePage):
 
 class TrainingPage(AssociationTilePage):
 	pass
+
+class EmptyPage(AssociationTilePage):
+	text = RichTextField(blank=False,verbose_name="Text",help_text=_("Text"))
+	class Meta:
+		verbose_name = _('Empty page')
+
+EmptyPage.content_panels = [
+	FieldPanel('title', classname="full title"),
+	FieldPanel('icon_class', classname="full"),
+	FieldPanel('text', classname="full"),
+]
 
 
 # Dossier and Article
@@ -183,6 +195,11 @@ class SimplePage(Page):
 	text = RichTextField(blank=True,verbose_name="Text",help_text=_("Text"))
 	class Meta:
 		verbose_name = _('Simple page')
+
+SimplePage.content_panels = [
+	FieldPanel('title', classname="full title"),
+	FieldPanel('text', classname="full"),
+]
 
 ## PressBook Page
 class PressbookPage(Page):
