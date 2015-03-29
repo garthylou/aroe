@@ -40,7 +40,7 @@ class HomePage(Page):
 	]
 	news = RichTextField(
 		blank=True,
-		verbose_name="News",
+		verbose_name=_("News"),
 		help_text=_("Text to put into the News part on Home."))
 	search_fields = Page.search_fields + (
 		index.SearchField('news'),
@@ -55,7 +55,7 @@ class HomePageCarouselItem(Orderable, CarouselItem):
 HomePage.content_panels = [
 	FieldPanel('title', classname="full title"),
 	FieldPanel('news', classname="full", ),
-	InlinePanel(HomePage, 'carousel_items', label="Carousel items"),
+	InlinePanel(HomePage, 'carousel_items', label=_("Carousel items")),
 ]
 
 
@@ -106,7 +106,7 @@ class BureauPage(AssociationTilePage):
 BureauPage.content_panels = [
 	FieldPanel('title', classname="full title"),
 	FieldPanel('icon_class', classname="full"),
-	InlinePanel(BureauPage, 'poste_items', label="Poste items"),
+	InlinePanel(BureauPage, 'poste_items', label=_("Poste items")),
 ]
 
 class MembresPage(AssociationTilePage):
@@ -151,14 +151,14 @@ class DossierPage(Page):
 		'aroe.ArticlePage',
 		'aroe.DossierPage'
 	]
-	text_content = RichTextField(blank=True,verbose_name="Introduction",help_text=_("Introduce the content of the Dossier."))
+	text_content = RichTextField(blank=True,verbose_name=_("Introduction"),help_text=_("Introduce the content of the Dossier."))
 	class Meta:
 		verbose_name = _('Dossier')
 
 DossierPage.content_panels = [
 	FieldPanel('title', classname="full title"),
 	FieldPanel('text_content', classname="full"),
-	InlinePanel(DossierPage, 'image_items', label="Images"),
+	InlinePanel(DossierPage, 'image_items', label=_("Images")),
 ]
 
 class ArticleImageItem(Orderable, models.Model):
@@ -179,14 +179,14 @@ class ArticleImageItem(Orderable, models.Model):
 
 
 class ArticlePage(Page):
-	text_content = RichTextField(blank=True,verbose_name="Content",help_text=_("Content of the article."))
+	text_content = RichTextField(blank=True,verbose_name=_("Content"),help_text=_("Content of the article."))
 	class Meta:
 		verbose_name = _('Article')
 
 ArticlePage.content_panels = [
 	FieldPanel('title', classname="full title"),
 	FieldPanel('text_content', classname="full"),
-	InlinePanel(ArticlePage, 'image_items', label="Images"),
+	InlinePanel(ArticlePage, 'image_items', label=_("Images")),
 ]
 
 
@@ -210,7 +210,7 @@ class PressbookPage(Page):
 		verbose_name = _('Pressbook page')
 
 class PressbookArticlePage(Page):
-	text = RichTextField(blank=False,verbose_name="Text",help_text=_("Text"))
+	text = RichTextField(blank=False,verbose_name=_("Text"),help_text=_("Text"))
 	image = models.ForeignKey(
 		'wagtailimages.Image',
 		null=True,

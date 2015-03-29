@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AROE 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-28 08:33+0100\n"
-"PO-Revision-Date: 2015-03-28 08:33+0100\n"
+"POT-Creation-Date: 2015-03-29 11:54+0200\n"
+"PO-Revision-Date: 2015-03-29 11:55+0100\n"
 "Last-Translator: GURY <jeanbaptiste.gury@gmail.com>\n"
 "Language-Team: French team <garthylou@gmx.com>\n"
 "Language: \n"
@@ -20,7 +20,7 @@ msgstr ""
 #: aroe/models.py:23
 #: aroe/models.py:140
 #: aroe/models.py:171
-#: aroe/models.py:215
+#: aroe/models.py:220
 msgid "image"
 msgstr "image"
 
@@ -34,6 +34,10 @@ msgstr "image"
 msgid "Title"
 msgstr "Titre"
 
+#: aroe/models.py:43
+msgid "News"
+msgstr "Nouveautés"
+
 #: aroe/models.py:44
 msgid "Text to put into the News part on Home."
 msgstr "Texte à placer dans les Nouveautés en page d'accueil"
@@ -41,6 +45,10 @@ msgstr "Texte à placer dans les Nouveautés en page d'accueil"
 #: aroe/models.py:49
 msgid "Home"
 msgstr "Accueil"
+
+#: aroe/models.py:58
+msgid "Carousel items"
+msgstr "Les images du caroussel"
 
 #: aroe/models.py:72
 msgid "Association"
@@ -66,16 +74,24 @@ msgstr "Membre"
 msgid "Caption"
 msgstr "Intitulé"
 
+#: aroe/models.py:109
+msgid "Poste items"
+msgstr "Les différents postes"
+
 #: aroe/models.py:120
 #: aroe/models.py:195
-#: aroe/models.py:208
+#: aroe/models.py:213
 msgid "Text"
 msgstr "Texte"
 
 #: aroe/models.py:122
-#| msgid "Simple page"
 msgid "Empty page"
 msgstr "Page vide"
+
+#: aroe/models.py:154
+#| msgid "Location"
+msgid "Introduction"
+msgstr "Introduction"
 
 #: aroe/models.py:154
 msgid "Introduce the content of the Dossier."
@@ -84,6 +100,16 @@ msgstr "Introduit le contenu du dossier."
 #: aroe/models.py:156
 msgid "Dossier"
 msgstr "Dossier"
+
+#: aroe/models.py:161
+#: aroe/models.py:189
+#| msgid "image"
+msgid "Images"
+msgstr "Images"
+
+#: aroe/models.py:182
+msgid "Content"
+msgstr "Contenu"
 
 #: aroe/models.py:182
 msgid "Content of the article."
@@ -97,35 +123,35 @@ msgstr "Article"
 msgid "Simple page"
 msgstr "Page simple"
 
-#: aroe/models.py:205
+#: aroe/models.py:210
 msgid "Pressbook page"
 msgstr "Page pressbook"
 
-#: aroe/models.py:217
+#: aroe/models.py:222
 msgid "Source"
 msgstr "Source"
 
-#: aroe/models.py:217
+#: aroe/models.py:222
 msgid "Title of the source"
 msgstr "Titre de l'article"
 
-#: aroe/models.py:218
+#: aroe/models.py:223
 msgid "Source detail"
 msgstr "Détail de la source"
 
-#: aroe/models.py:218
+#: aroe/models.py:223
 msgid "Detail of the source (publication date, # of the mag, ...)"
 msgstr "Détail de la source (date de publication, numéro de magazine, etc.)"
 
-#: aroe/models.py:225
+#: aroe/models.py:230
 msgid "icon"
 msgstr "icône"
 
-#: aroe/models.py:226
+#: aroe/models.py:231
 msgid "Icon of the source to display in pressbook."
 msgstr "Icône de la source à afficher dans le pressbook."
 
-#: aroe/models.py:229
+#: aroe/models.py:234
 msgid "article for pressbook"
 msgstr "article pour le pressbook"
 
