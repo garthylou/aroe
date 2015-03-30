@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'modelcluster',
     'aroeapi',
     'rest_framework',
+    'watson',
 
     'wagtail.wagtailcore',
     'wagtail.wagtailadmin',
@@ -169,6 +170,16 @@ PASSWORD_REQUIRED_TEMPLATE = 'aroe/password_required.html'
 # }
 
 
+WAGTAILSEARCH_BACKENDS = {
+      'default': {
+         'BACKEND': 'core.backends.djangowatson.WatsonSearch',
+         'INDEX': 'aroeweb',
+     },
+}
+
+WAGTAILSEARCH_RESULTS_TEMPLATE = 'aroe/search_results.html'
+
+
 #HAYSTACK_CONNECTIONS = {
 #    'default': {
 #        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
@@ -222,6 +233,10 @@ LOGGING = {
     },
     'loggers': {
         'aroeapi': {
+            'handlers': ['console'],
+            'level': 'INFO'
+        },
+        'core': {
             'handlers': ['console'],
             'level': 'INFO'
         }

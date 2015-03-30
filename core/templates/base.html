@@ -45,12 +45,12 @@
           </button>
           <a class="navbar-brand" href="/">AROE</a>
         </div>
-        <form class="navbar-collapse collapse navbar-form navbar-left search" role="search">
+        <form class="navbar-collapse collapse navbar-form navbar-left search" role="search"action="{% url 'wagtailsearch_search' %}" method="get" id="search_form">
             <div class="form-group">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Recherche">
+                    <input type="text" class="form-control" name="q"{% if query_string %} value="{{query_string}}" {%endif%} placeholder="Recherche">
                     <span class="input-group-btn">
-                        <button class="btn btn-default " type="button"><span class="glyphicon glyphicon-search"></span></button>
+                        <button class="btn btn-default " type="button"><span class="glyphicon glyphicon-search" form="search_form"></span></button>
                     </span>
                 </div>
             </div>

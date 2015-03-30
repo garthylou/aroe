@@ -219,7 +219,7 @@ class PressbookArticlePage(Page):
 		related_name='+',
 		verbose_name=_('image')
 	)
-	source = models.CharField(verbose_name=_("Source"), max_length=255,help_text=_("Title of the source"))
+	source = models.CharField(verbose_name=_("Source"), max_length=255,help_text=_("Name of the source"))
 	detail = models.CharField(verbose_name=_("Source detail"), max_length=255, help_text=_("Detail of the source (publication date, # of the mag, ...)"))
 	icon_source = models.ForeignKey(
 		'wagtailimages.Image',

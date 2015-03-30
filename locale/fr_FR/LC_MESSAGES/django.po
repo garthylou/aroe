@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AROE 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-29 11:54+0200\n"
-"PO-Revision-Date: 2015-03-29 11:55+0100\n"
+"POT-Creation-Date: 2015-03-30 17:23+0200\n"
+"PO-Revision-Date: 2015-03-30 17:23+0100\n"
 "Last-Translator: GURY <jeanbaptiste.gury@gmail.com>\n"
 "Language-Team: French team <garthylou@gmx.com>\n"
 "Language: \n"
@@ -89,7 +89,6 @@ msgid "Empty page"
 msgstr "Page vide"
 
 #: aroe/models.py:154
-#| msgid "Location"
 msgid "Introduction"
 msgstr "Introduction"
 
@@ -103,7 +102,6 @@ msgstr "Dossier"
 
 #: aroe/models.py:161
 #: aroe/models.py:189
-#| msgid "image"
 msgid "Images"
 msgstr "Images"
 
@@ -132,8 +130,9 @@ msgid "Source"
 msgstr "Source"
 
 #: aroe/models.py:222
-msgid "Title of the source"
-msgstr "Titre de l'article"
+#| msgid "Title of the source"
+msgid "Name of the source"
+msgstr "Nom de la source"
 
 #: aroe/models.py:223
 msgid "Source detail"
