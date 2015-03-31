@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 from django.core.exceptions import NON_FIELD_ERRORS
 from datetime import date, datetime
+import os
 
 
 
@@ -11,10 +12,11 @@ def path_members_photo(instance, filename):
 	"""
 	Function to define the url to access to image for members
 	"""
+	fn, extension = os.path.splitext(filename)
 	if instance.id is not None :
-		return 'members/photo/%s-%s-%s' % (instance.id, instance.family_name,instance.firstname)
+		return 'members/photo/%s-%s-%s.%s' % (instance.id, instance.family_name,instance.firstname, extension)
 	else:
-		return 'members/photo/%s-%s' % (instance.family_name,instance.firstname)
+		return 'members/photo/%s-%s.%s' % (instance.family_name,instance.firstname, extension)
 
 class Member(models.Model):
 	family_name = models.CharField(_('Family name'), max_length=200)

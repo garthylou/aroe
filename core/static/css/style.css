@@ -506,17 +506,12 @@ a.entry-navigation:hover {
 	padding-left: 20px;
 }
 
-#footerwrap i, a {
+#footerwrap i, #footerwrap a {
 	color: #bfc9d3;
 	padding-right: 25px;
 }
 
-
-#footerwrap i {
-	/*font-size: 30px;*/
-}
-
-#footerwrap i:hover {
+#footerwrap i:hover, #footerwrap a:hover{
 	color: #00b3fe
 }
 

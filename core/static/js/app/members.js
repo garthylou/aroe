@@ -90,7 +90,11 @@ membersMgt.controller('MembersRowCtrl', ['$scope', '$filter', '$http', '$upload'
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                 }).success(function (data, status, headers, config) {
                   $scope.selecteduser.photo = data.photo;
-                  //$scope.reloadUsers(); 
+                  $scope.users.find(function (element, index, array) {
+                    if (element.id == $scope.selecteduser.id){
+                      return true;
+                    }
+                  }).photo = data.photo;
                 });
             }
         }

@@ -10,9 +10,16 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework import status
 from django.utils.translation import ugettext_lazy as _
+
+from PIL import Image, ExifTags
+import os,sys
+
 import logging
 
 logger = logging.getLogger(__name__)
+
+MAX_WIDTH = 800
+MAX_HEIGHT= 600
 
 class MembersViewSet(viewsets.ModelViewSet):
 	queryset = models.Member.objects.all()
@@ -21,6 +28,53 @@ class MembersViewSet(viewsets.ModelViewSet):
 class AvatarMemberViewSet(viewsets.ModelViewSet):
 	queryset = models.Member.objects.all()
 	serializer_class = serializers.AvatarMemberSerializer
+
+	def perform_create(self, serializer):
+		instance = serializer.save()
+		# Get the image and obtain its orientation
+		self.fix_orientation(instance)
+
+	def perform_update(self, serializer):
+		old_photo = self.get_object().photo
+		instance = serializer.save()
+		if old_photo :
+			os.remove(old_photo.path)
+		self.fix_orientation(instance)
+
+	def fix_orientation(self, instance ):
+		if instance.photo :
+			try :
+				image = Image.open(instance.photo.path)
+				if hasattr(image, '_getexif'):
+					for orientation in ExifTags.TAGS.keys():
+						if ExifTags.TAGS[orientation]=='Orientation':
+							break 
+        			e = image._getexif()       # returns None if no EXIF data
+        			if e is not None:
+        				exif=dict(e.items())
+        				orientation = exif[orientation]
+        				if orientation == 3: 
+        					image = image.transpose(Image.ROTATE_180)
+        				elif orientation == 6: 
+        					image = image.transpose(Image.ROTATE_270)
+        				elif orientation == 8: 
+        					image = image.transpose(Image.ROTATE_90)
+        				else:
+        					pass
+        				image.save(instance.photo.path)
+
+        			# Resize image to be compliant with WEB
+        			s = image.size
+        			ratio_width = s[0]/MAX_WIDTH
+        			ratio_height = s[1]/MAX_HEIGHT
+        			logger.info("ratio w = %s, ratio h = %s"% (ratio_width, ratio_height))
+        			if (ratio_width > 1 or ratio_height > 1):
+        				ratio = max(ratio_width, ratio_height)
+        				image = image.resize((int(s[0]/ratio), int(s[1]/ratio)),Image.ANTIALIAS)
+        				image.save(instance.photo.path)
+			except NameError as e:
+				logger.error(sys.exc_info()[0])
+				logger.error(e)
 
 class TrainingViewSet(viewsets.ModelViewSet):
 	queryset = models.Training.objects.all()
