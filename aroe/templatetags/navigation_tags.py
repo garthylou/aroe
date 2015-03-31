@@ -24,8 +24,8 @@ def dossier_menu(context):
 	menuitems = []
 	dossieritems = []
 	if dossier_page :
-		menuitems = ArticlePage.objects.live().descendant_of(dossier_page)
-		dossieritems = DossierPage.objects.live().descendant_of(dossier_page)
+		menuitems = ArticlePage.objects.live().child_of(dossier_page)
+		dossieritems = DossierPage.objects.live().child_of(dossier_page)
 		context['articleitems'] = menuitems
 		context['dossieritems'] = dossieritems
 	return menuitems
@@ -33,13 +33,13 @@ def dossier_menu(context):
 
 @register.assignment_tag(takes_context=True)
 def article_menu(context):
-	dossier_page = DossierPage.objects.live().ancestor_of(context['self']).first()
+	dossier_page = DossierPage.objects.live().ancestor_of(context['self']).last()
 	context['dossier']=dossier_page
 	menuitems = []
 	dossieritems = []
 	if dossier_page :
-		menuitems = ArticlePage.objects.live().descendant_of(dossier_page)
-		dossieritems = DossierPage.objects.live().descendant_of(dossier_page)
+		menuitems = ArticlePage.objects.live().child_of(dossier_page)
+		dossieritems = DossierPage.objects.live().child_of(dossier_page)
 		context['articleitems'] = menuitems
 		context['dossieritems'] = dossieritems
 	return menuitems
