@@ -19,15 +19,31 @@
 	 		</div>
 		 	<div class="col-md-10 col-lg-10">
 		 		{% if search_results %}
-		 		<ul>
+		 		{% if request.GET.q %}
+		 		{% with search_results|length as total_result %}
+		 		<h3>{{ total_result }} résultat{% if total_result > 1 %}s{% endif %} pour &laquo;{{request.GET.q}}&raquo;</h3>
+		 		{% endwith %}
+		 		{%endif%}
+		 		<ul class="search-results">
 				{% for result in search_results %}
-					<li><a href="{% pageurl result %}">{{ result.title }}</a>
+					<li class="search-entry">
+						<a href="{% pageurl result %}">{{ result.title }}</a>
+						<p class="result-extract">
+							{{ result | display_extract:request.GET.q|safe}}
+						</p>
+						<p class="result-path">
+							{{ result| display_path}}
+						</p>
 					</li>
 
 				{% endfor %}
 				</ul>
+				{% else %}
+				<div class="spacing"></div>
+				Aucun résultat à afficher.
 				{% endif %}
 		 	</div>
+		 	<div class="spacing"></div>
 	 	</div><!--/row -->
 	 </div><!--/container -->
 	 

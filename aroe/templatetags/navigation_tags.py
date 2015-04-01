@@ -1,6 +1,9 @@
 from django import template
 
 from aroe.models import *
+from wagtail.wagtailcore.models import Page
+from django.template import defaultfilters
+import re
 
 
 
@@ -79,3 +82,50 @@ def pressbook_articles_col_right(articles):
 	if (articles):
 		sep = len(articles)/2 +1
 		return articles[sep:]
+
+@register.filter
+def display_extract(page, query):
+	if page and query:
+		text_search = ""
+		for f in (
+				field.name for field in page._meta.fields 
+				if isinstance(field, (models.CharField, models.TextField))):
+			if f in ('path','title','slug', 'url','url_path'):
+				continue
+
+			attrf = getattr(page, f)
+			if attrf :
+				text_search += defaultfilters.strip_tags(attrf)
+		p = re.compile(r'(?i)\b%s'%query)
+		text_search = p.sub("<b>%s</b>"%query, text_search)
+		# Extract around the text
+		m = p.search(text_search)
+		# Find the sentence of the match
+		sentences = [s+'.' for s in text_search.split('.') if query in s][:3]
+		extract = ""
+		for e in sentences :
+			if not text_search.startswith(e):
+				extract += "..." + e
+			else :
+				extract += e
+		if not text_search.endswith(sentences[-1]):
+			extract += "..."
+		return extract
+	return ""
+
+@register.filter
+def display_path(page):
+	if page :
+		path = ""
+		first = False
+		for ancestor in page.get_ancestors():
+			if first :
+				path += " > "
+			if isinstance(ancestor.specific, HomePage):
+				continue
+			if ancestor.title == 'Root':
+				continue
+			path += ancestor.title
+			first= True
+		return path
+	return ""

@@ -38,6 +38,7 @@ class HomePage(Page):
 		'aroe.SimplePage',
 		'aroe.PressbookPage',
 	]
+	parent_page_types = []
 	news = RichTextField(
 		blank=True,
 		verbose_name=_("News"),
@@ -61,6 +62,7 @@ HomePage.content_panels = [
 
 # AssociationRootPage
 class AssociationRootPage(Page):
+	parent_page_types = [ 'aroe.HomePage']
 	subpage_types = [
 		'aroe.AssociationTilePage',
 		'aroe.BureauPage',
