@@ -12,6 +12,13 @@ TEMPLATE_DEBUG = False
 
 COMPRESS_OFFLINE = True
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': join(PROJECT_ROOT, '../db.sqlite3'),
+    }
+}
+
 
 # Send notification emails as a background task using Celery,
 # to prevent this from blocking web server threads

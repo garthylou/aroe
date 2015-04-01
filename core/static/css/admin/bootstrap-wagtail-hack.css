@@ -18,6 +18,12 @@ body{
     vertical-align: -20%;
 }
 
+.nav-main .menu-item a:before {
+    font-size: 1.2em;
+    margin-right: 0.5em;
+    vertical-align: -20%;
+}
+
 .nav-main a {
     padding: 0.64em 1.36em;
 }
