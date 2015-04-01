@@ -19,3 +19,5 @@ class AroeAppConfig(AppConfig):
 		watson.register(SimplePage.objects.all())
 		watson.register(PressbookPage.objects.all())
 		watson.register(PressbookArticlePage.objects.all())
+
+		import receivers

@@ -13,6 +13,7 @@ from rest_framework import status
 from django.utils.translation import ugettext_lazy as _
 from rest_framework.settings import api_settings
 from rest_framework_csv import renderers as r
+from core.image_processing import ImageProcessor
 
 from PIL import Image, ExifTags
 import os,sys
@@ -35,47 +36,22 @@ class AvatarMemberViewSet(viewsets.ModelViewSet):
 
 	def perform_create(self, serializer):
 		instance = serializer.save()
-		# Get the image and obtain its orientation
-		self.fix_orientation(instance)
+		# Perform post-processing treatment
+		self.post_process(instance)
 
 	def perform_update(self, serializer):
 		old_photo = self.get_object().photo
 		instance = serializer.save()
 		if old_photo :
 			os.remove(old_photo.path)
-		self.fix_orientation(instance)
+		self.post_process(instance)
 
-	def fix_orientation(self, instance ):
+	def post_process(self, instance ):
 		if instance.photo :
+			img_proc = ImageProcessor(instance.photo.path)
 			try :
-				image = Image.open(instance.photo.path)
-				if hasattr(image, '_getexif'):
-					for orientation in ExifTags.TAGS.keys():
-						if ExifTags.TAGS[orientation]=='Orientation':
-							break 
-        			e = image._getexif()       # returns None if no EXIF data
-        			if e is not None:
-        				exif=dict(e.items())
-        				orientation = exif[orientation]
-        				if orientation == 3: 
-        					image = image.transpose(Image.ROTATE_180)
-        				elif orientation == 6: 
-        					image = image.transpose(Image.ROTATE_270)
-        				elif orientation == 8: 
-        					image = image.transpose(Image.ROTATE_90)
-        				else:
-        					pass
-        				image.save(instance.photo.path)
-
-        			# Resize image to be compliant with WEB
-        			s = image.size
-        			ratio_width = s[0]/MAX_WIDTH
-        			ratio_height = s[1]/MAX_HEIGHT
-        			logger.info("ratio w = %s, ratio h = %s"% (ratio_width, ratio_height))
-        			if (ratio_width > 1 or ratio_height > 1):
-        				ratio = max(ratio_width, ratio_height)
-        				image = image.resize((int(s[0]/ratio), int(s[1]/ratio)),Image.ANTIALIAS)
-        				image.save(instance.photo.path)
+				img_proc.auto_orient()
+				img_proc.resize(800,600)
 			except NameError as e:
 				logger.error(sys.exc_info()[0])
 				logger.error(e)
