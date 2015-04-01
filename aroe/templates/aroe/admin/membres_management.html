@@ -16,6 +16,7 @@
     {% block extra_css %}
 		{% compress css %}
 		<link rel="stylesheet" href="{{ STATIC_URL}}bower_components/angular-xeditable/dist/css/xeditable.css"/>
+		<link href="{{STATIC_URL}}css/angular-growl.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="{{ STATIC_URL }}wagtailadmin/scss/layouts/home.scss" type="text/x-scss" />
 		<link rel="stylesheet" href="{{ STATIC_URL }}css/admin/aroe-admin.css" type="text/css" />
 		{% endcompress %}
@@ -75,10 +76,10 @@
 						ng-show="selecteduser.photo != null && selecteduser != null"
 						><span aria-hidden="true">&times;</span><span class="sr-only">{% trans 'Clear avatar' %}</span>
 					</button>
- 					<button class="btn btn-xs btn-default" ng-file-select ng-file-change="upload($files)" ng-show="selecteduser != null" ng-disabled="editableForm.$visible || selecteduser.id == null" ng-model="picFile">Change photo</button>
- 					<img ng-show="picFile[0].dataUrl != null" ng-src="{$ picFile[0].dataUrl $}" class="thumb">
-					<span class="progress" ng-show="picFile[0].progress >= 0">		
-						<div class="ng-binding" style="width:{$ picFile[0].progress $}%" ng-bind="picFile[0].progress + '%'"></div>
+ 					<button class="btn btn-xs btn-default" ng-file-select ng-model="files"  ng-show="selecteduser != null" ng-disabled="editableForm.$visible || selecteduser.id == null" >Change photo</button>
+ 					<img ng-show="files[0].dataUrl != null" ng-src="{$ files[0].dataUrl $}" class="thumb">
+					<span class="progress-upload" ng-show="files[0].progress >= 0">		
+						<div class="ng-binding" style="width:{$ files[0].progress $}%" ng-bind="files[0].progress + '%'"></div>
 					</span>	
 
  				</div>
@@ -143,6 +144,8 @@
  		<div>
  			<span class="glyphicon glyphicon-download-alt"></span><a href="/api/members?format=csv">Télécharger la liste des membres (format CSV)</a>
  		</div>
+ 		<div growl>
+		</div>
  	</div>
 </div>
 </div>
@@ -159,6 +162,9 @@
 <script src="{{STATIC_URL}}bower_components/angular-xeditable/dist/js/xeditable.min.js"></script>
 <script src="{{STATIC_URL}}bower_components/ng-file-upload/angular-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
 <script src="{{STATIC_URL}}bower_components/ng-file-upload/angular-file-upload.min.js"></script> 
+ <script src="{{STATIC_URL}}bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+<script src="{{STATIC_URL}}bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="{{STATIC_URL}}bower_components/angular-growl/build/angular-growl.js"></script>
 <script src="{{ STATIC_URL}}js/app/members.js"></script>
 <script src="{{ STATIC_URL}}js/app/training.js"></script>
 <script src="{{ STATIC_URL}}js/app/app.js"></script>

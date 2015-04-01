@@ -1,7 +1,7 @@
 var membersMgt = angular.module('aroeMembersMgt', ['angularFileUpload']);
 
-membersMgt.controller('MembersRowCtrl', ['$scope', '$filter', '$http', '$upload', 
-                                function($scope, $filter, $http, $upload) {
+membersMgt.controller('MembersRowCtrl', ['$scope', '$filter', '$http', '$upload', 'growl', 
+                                function($scope, $filter, $http, $upload, growl) {
 
   
   $scope.$watch('files', function () {
@@ -81,6 +81,7 @@ membersMgt.controller('MembersRowCtrl', ['$scope', '$filter', '$http', '$upload'
         if (files && files.length) {
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
+                $scope.picFile = file;
                 $upload.upload({
                     url: '/api/avatars/'+$scope.selecteduser.id,
                     file: file,
@@ -88,6 +89,7 @@ membersMgt.controller('MembersRowCtrl', ['$scope', '$filter', '$http', '$upload'
                     method : 'PUT',
                 }).progress(function (evt) {
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                    file.progress = progressPercentage;
                 }).success(function (data, status, headers, config) {
                   $scope.selecteduser.photo = data.photo;
                   $scope.users.find(function (element, index, array) {
@@ -95,6 +97,14 @@ membersMgt.controller('MembersRowCtrl', ['$scope', '$filter', '$http', '$upload'
                       return true;
                     }
                   }).photo = data.photo;
+                  $scope.files = [];
+                }).error(function(result)
+                {
+                  if (result.photo[0]) {
+                    growl.addErrorMessage(result.photo[0]);
+                  } else {
+                    growl.addErrorMessage(result);
+                  }
                 });
             }
         }

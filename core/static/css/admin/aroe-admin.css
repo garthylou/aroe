@@ -29,3 +29,15 @@
 {
 	color: #0B0B61;
 }
+
+.progress-upload {
+	display: inline-block;
+	width: 100px;
+	border: 1px groove #CCC;
+}
+.progress-upload div {
+	font-size: smaller;
+	background: orange;
+	width: 0; 
+	height:20px;
+}

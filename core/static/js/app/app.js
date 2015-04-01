@@ -3,6 +3,9 @@ var aroeApp = angular.module('aroe', [
 	'xeditable',
 	'ui.bootstrap',
 	'angularFileUpload',
+	'angular-growl',
+	'ngAnimate',
+	'ngSanitize',
 	'aroeMembersMgt',
 	'aroeTrainingMgt',
 ]);
@@ -24,6 +27,10 @@ aroeApp.run(['$http', '$cookies', function ($http, $cookies) {
 	$http.defaults.headers.common['X-CSRFToken'] = $cookies.csrftoken;
 }]);
 
+aroeApp.config(['growlProvider', function(growlProvider) {
+	growlProvider.globalTimeToLive(10000);
+	growlProvider.onlyUniqueMessages(false);
+}]);
 
 
 

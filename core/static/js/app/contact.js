@@ -33,7 +33,6 @@ contactModule.controller('ContactCtrl', ['$scope', '$http', '$modal', 'growl',
          		growl.addSuccessMessage(result);
         	})
         	.error(function(result){
-            console.log(angular.toJson(result));
             if (result.detail) {
               growl.addErrorMessage('L\'envoi de message est limité. Vous avez épuisé votre quota. Essayez un autre jour');
             } else {
