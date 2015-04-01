@@ -13,17 +13,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="shortcut icon" href="{% static 'ico/favicon.ico' %}">
 
+        <link href="http://fonts.googleapis.com/css?family=Raleway:400,700,900" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet" type="text/css">
         {% compress css %}
             
              <!-- Bootstrap core CSS -->
             <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css">
-            <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
-            <link href="{{STATIC_URL}}css/angular-growl.min.css" rel="stylesheet">
-
+            <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet" type="text/css">
+            <link href="{% static 'css/angular-growl.min.css' %}" rel="stylesheet">
             <!-- Custom styles for this template -->
             <link rel="stylesheet" type="text/css" href="{% static 'css/aroeweb.css' %}">
             <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css">
-            
+            <link href="{% static 'css/prettyPhoto.css' %}" rel="stylesheet" type="text/css">
+            <link href="{% static 'css/hoverex-all.css' %}" rel="stylesheet" type="text/css">
         {% endcompress %}
 
         {% block extra_css %}
@@ -118,7 +120,6 @@
             <script type="text/javascript" src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script type="text/javascript" src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
             <![endif]-->
-    
             <script type="text/javascript" src="{% static 'js/modernizr.js' %}"></script>
             <!-- Bootstrap core JavaScript
             ================================================== -->
@@ -129,20 +130,23 @@
             <script type="text/javascript" src="{% static 'js/jquery.hoverdir.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/jquery.hoverex.min.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/jquery.prettyPhoto.js' %}"></script>
-            <script type="text/javascript" src="{% static 'js/jquery.isotope.min.js' %}"></script>
+        {% endcompress %}
+        <script type="text/javascript" src="{% static 'js/jquery.isotope.min.js' %}"></script>
+        {% compress js %}
             
-            <script src="{{STATIC_URL }}bower_components/angular/angular.min.js"></script>
-            <script src="{{STATIC_URL }}bower_components/angular-cookies/angular-cookies.min.js"></script>
+            <script src="{{STATIC_URL }}bower_components/angular/angular.js"></script>
+            <script src="{{STATIC_URL }}bower_components/angular-cookies/angular-cookies.js"></script>
             <script src="{{STATIC_URL}}bower_components/angular-i18n/angular-locale_fr-fr.js"></script>
-            <script src="{{STATIC_URL}}bower_components/angular-sanitize/angular-sanitize.min.js"></script>
-            <script src="{{STATIC_URL}}bower_components/angular-animate/angular-animate.min.js"></script>
-            <script src="{{STATIC_URL}}bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+            <script src="{{STATIC_URL}}bower_components/angular-sanitize/angular-sanitize.js"></script>
+            <script src="{{STATIC_URL}}bower_components/angular-animate/angular-animate.js"></script>
+            <script src="{{STATIC_URL}}bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
             <script src="{{STATIC_URL}}bower_components/angular-growl/build/angular-growl.js"></script>
             <script src="{{ STATIC_URL }}js/app/contact.js"></script>
             <script src="{{ STATIC_URL }}js/app/members.js"></script>
             <script src="{{ STATIC_URL }}js/app/training.js"></script>
             <script src="{{ STATIC_URL }}js/app/app.js"></script>
             <script type="text/javascript" src="{% static 'js/aroeweb.js' %}"></script>
+            
         {% endcompress %}
 
         {% block extra_js %}
