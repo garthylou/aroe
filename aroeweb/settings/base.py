@@ -202,8 +202,12 @@ REST_FRAMEWORK = {
         #'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
-
+    'DEFAULT_THROTTLE_RATES' : {
+        'anon' : '5/day',
+    },
 }
+
+
 
 APPEND_SLASH = False
 

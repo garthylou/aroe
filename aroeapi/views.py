@@ -6,10 +6,13 @@ from rest_framework import status
 from aroeapi import models
 from aroeapi import serializers
 from django.core.files import File
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, throttle_classes
 from rest_framework.permissions import AllowAny
+from rest_framework.throttling import AnonRateThrottle
 from rest_framework import status
 from django.utils.translation import ugettext_lazy as _
+from rest_framework.settings import api_settings
+from rest_framework_csv import renderers as r
 
 from PIL import Image, ExifTags
 import os,sys
@@ -24,6 +27,7 @@ MAX_HEIGHT= 600
 class MembersViewSet(viewsets.ModelViewSet):
 	queryset = models.Member.objects.all()
 	serializer_class = serializers.MemberSerializer
+	renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES + [r.CSVRenderer, ] 
 
 class AvatarMemberViewSet(viewsets.ModelViewSet):
 	queryset = models.Member.objects.all()
@@ -83,6 +87,7 @@ class TrainingViewSet(viewsets.ModelViewSet):
 
 @api_view(['POST'])
 @permission_classes((AllowAny,))
+@throttle_classes([AnonRateThrottle,])
 def send_message(request):
 	if request.data['from'] and request.data['to'] and request.data['message']:
 		
