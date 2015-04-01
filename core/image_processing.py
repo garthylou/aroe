@@ -18,17 +18,20 @@ class ImageProcessor(object) :
 			for orientation in ExifTags.TAGS.keys():
 				if ExifTags.TAGS[orientation]=='Orientation':
 					break
-        	e = self.image._getexif()       # returns None if no EXIF data
-        	if e is not None:
-        		exif=dict(e.items())
-        		orientation = exif[orientation]
-        		if orientation == 3: 
-        			self.image = self.image.transpose(Image.ROTATE_180)
-        		elif orientation == 6: 
-        			self.image = self.image.transpose(Image.ROTATE_270)
-        		elif orientation == 8: 
-        			self.image = self.image.transpose(Image.ROTATE_90)
-        		self.image.save(self.image_path)
+			e = self.image._getexif()       # returns None if no EXIF data
+			if e is not None:
+				exif=dict(e.items())
+				orientation = exif[orientation]
+				if orientation == 3: 
+					self.image = self.image.transpose(Image.ROTATE_180)
+				elif orientation == 6: 
+					self.image = self.image.transpose(Image.ROTATE_270)
+				elif orientation == 8: 
+					self.image = self.image.transpose(Image.ROTATE_90)
+				self.image.save(self.image_path)
+		else :
+			self.image.close()
+			self.image = None
 
 	def resize(self, width, height) :
 		if self.image is None :

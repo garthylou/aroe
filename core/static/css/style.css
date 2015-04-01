@@ -446,10 +446,10 @@ a.entry-navigation:hover {
 	border: medium none;
     border-radius: 2px;
     display: inline-block;
-    height: 24px;
+    height: auto;
     margin-right: 5px;
-    max-width: none;
-    width: 24px;
+    max-width: 24px;
+    /*width: 24px;*/
 }
 
 .news-source {
