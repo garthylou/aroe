@@ -29,7 +29,7 @@ class Member(models.Model):
 	photo = models.ImageField(_('Photo'),upload_to=path_members_photo, blank=True, null=True)
 
 	def __unicode__(self):
-		return "{0} {1} {2}".format( self.family_name, self.firstname, self.zipcode )
+		return u"{0} {1} {2}".format( self.family_name, self.firstname, self.zipcode )
 
 
 class Training(models.Model):
