@@ -108,8 +108,9 @@ def display_extract(page, query):
 				extract += "..." + e
 			else :
 				extract += e
-		if not text_search.endswith(sentences[-1]):
-			extract += "..."
+		if len(sentences) > 0:
+			if not text_search.endswith(sentences[-1]):
+				extract += "..."
 		return extract
 	return ""
 
