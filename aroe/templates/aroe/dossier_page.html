@@ -40,7 +40,12 @@
 		 			<div class="{{self.image_items.all|determine_dossier_class}}">
 		 				<div class="thumbnail">
 		 					{% image image_item.image max-250x250 as imagedata %}
-		 					<img src="{{ imagedata.url }}">
+		 					<img src="{{ imagedata.url }}" alt="{{ image_item.caption}}">
+		 					{% if imagedata.caption|length > 0 %}
+		 					<div class="caption">
+		 						<p>{{image_item.caption}}</p>
+		 					</div>
+		 					{% endif %}
 		 				</div>
 		 			</div>
 		 			{% endfor %}
