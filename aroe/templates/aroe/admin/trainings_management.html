@@ -84,12 +84,12 @@
 		 		</div>
 		 		<div class="col-md-12 col-lg-12">
 		 			<h6>{% trans 'Document' %}</h6>
-		 			
-		 			<div ng-show="training_document != null">
+
+		 			<div ng-show="training.document != null">
 		 				<div>
-		 					<i class="fa fa-file-text-o"></i> <a ng-href="{$ training_document.meta.download_url $}">{$ training_document.title $}</a>
+		 					<i class="fa fa-file-text-o"></i> <a ng-href="{$ document_url $}">{$ training.document_detail.title $}</a>
 		 				</div>
-		 				<ul class="actions">
+		 				<ul class="actions" ng-show="!editableForm.$visible">
 		 					<li><button class="action-clear button-small button-secondary" type="button" ng-click="disassociateDocument(training)">Désassocier</button>
 		 					</li>
 		 					<li>
@@ -97,7 +97,7 @@
 		 					</li>
 		 				</ul>
 		 			</div>
-		 			<button type="button" ng-show="!editableForm.$visible && training != null && training_document == null" ng-click="associateDocument(training)">Associer un document</button>
+		 			<button type="button" ng-show="!editableForm.$visible && training != null && training.document == null" ng-click="associateDocument(training)">Associer un document</button>
 		 		</div>
 		 		<div class="col-md-12 col-lg-12"></div>
 		 		<div class="col-md-12 col-lg-12 buttons">

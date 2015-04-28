@@ -96,13 +96,23 @@
 		 					{% next_training as nexttraining %}
 		 					{% for training in nexttraining %}
 		 					<li><div><div class="training-date"><span class="entry-day">{{training.start |date:'d'}} </span><span class="entry-month">{{training.start |date:'M'}}</span></div><div class="training-title">{{training.title}}</div>
+		 						<div class="pull-right" style="width:auto">
+		 							<div style="width:100%;display:inline-block">
 		 						{% with remaining_seats=training|remaining_seats class_rate=training|occupation_rate|rate_to_class %}
 		 						{% if remaining_seats == 0 %}
-		 						<span class="label label-danger pull-right" data-toggle="tooltip" data-placement="left" title="Complet">Complet</span>
+		 						<div class="training-indicator label label-danger pull-right" data-toggle="tooltip" data-placement="left" title="Complet">Complet</div>
 		 						{% elif remaining_seats != '' %}
-		 						<span class="label {{ class_rate }} pull-right" data-toggle="tooltip" data-placement="left" title="{{remaining_seats}} places restantes">{{remaining_seats}}</span>
+		 						<div class="training-indicator label {{ class_rate }} pull-right" data-toggle="tooltip" data-placement="left" title="{{remaining_seats}} places restantes">{{remaining_seats}}</div>
 		 						{% endif %}
 		 						{% endwith %}
+		 							</div>
+
+		 						{% if training.document != null %}
+		 						<div class="training-doc">
+		 							<a href="{{training.document.url}}" data-toggle="tooltip" title="{{training.document.title}}"><i class="fa fa-file-text-o"></i> plus d'infos</a>
+		 						</div>
+		 						{% endif %}
+		 						</div>
 		 					</div></li>
 		 					{% empty %}
 		 					<li><div>{% trans 'No scheduled training' %} </div>

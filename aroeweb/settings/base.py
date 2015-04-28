@@ -130,6 +130,7 @@ STATICFILES_FINDERS = (
 MEDIA_ROOT = join(PROJECT_ROOT, 'media')
 MEDIA_URL = '/media/'
 
+WAGTAILAPI_BASE_URL = "http://localhost:8000"
 
 # Django compressor settings
 # http://django-compressor.readthedocs.org/en/latest/settings/

@@ -4,17 +4,14 @@ var trainingMgt = angular.module('aroeTrainingMgt', []);
 trainingMgt.controller('TrainingCtrl', ['$scope', '$http', '$modal', 
                                 function($scope, $http, $modal) {
     $scope.training = null;
-    $scope.training_document = null;
 
-    $scope.$watch('training.document', function (newValue, oldValue)
+    $scope.$watch('training.document', function(newValue, oldValue)
     {
-      if(newValue){
-        $http.get('/api/v1/documents/'+newValue+"/").success(function(result)
-        {
-          $scope.training_document = result;
-        });
+      if(newValue)
+      {
+        $scope.get_download_url(newValue);
       } else {
-        $scope.training_document = null;
+        $scope.document_url = "";
       }
     });
 
@@ -27,6 +24,8 @@ trainingMgt.controller('TrainingCtrl', ['$scope', '$http', '$modal',
 
       $http.put('/api/trainings/'+data.id, data).success(function(result)
         {
+          $scope.training.document_detail = result.document_detail;
+
           if(callback)
           {
             callback();
@@ -78,7 +77,6 @@ trainingMgt.controller('TrainingCtrl', ['$scope', '$http', '$modal',
         url: window.chooserUrls.documentChooser,
         responses: {
           documentChosen: function(docData) {
-            training_document = docData;
             training.document = docData.id;
             $scope.updateTraining(training);
           }
@@ -92,6 +90,18 @@ trainingMgt.controller('TrainingCtrl', ['$scope', '$http', '$modal',
       $scope.updateTraining($scope.training);
     }
 
+    $scope.get_download_url = function(document_id)
+    {
+      if(document_id)
+      {
+        $scope.document_url = $http.get('/api/v1/documents/'+document_id+"/").success(function(result)
+        {
+          $scope.document_url = result.meta.download_url;
+        });
+      } else {
+        $scope.document_url = "";
+      }
+    }
 
 }
 ]);
@@ -126,4 +136,18 @@ members.controller('TrainingCtrl', ['$scope', '$filter', '$http',
                                 function($scope, $filter, $http) {
 
   $scope.training = null;
+
+  $scope.training_document = null;
+
+    $scope.$watch('training.document', function (newValue, oldValue)
+    {
+      if(newValue){
+        $http.get('/api/v1/documents/'+newValue+"/").success(function(result)
+        {
+          $scope.training_document = result;
+        });
+      } else {
+        $scope.training_document = null;
+      }
+    });
 }]);

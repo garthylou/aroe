@@ -60,6 +60,12 @@
 				 			<h6>{% trans 'Location' %}</h6>
 				 			<span class="training-field">{$ training.location || '&nbsp;' $}</span>
 				 		</div>
+				 		<div class="col-md-12 col-lg-12">
+		 					<h6>{% trans 'Document' %}</h6>
+		 					<div ng-show="training_document != null">
+		 						<i class="fa fa-file-text-o"></i> <a ng-href="{$ training_document.meta.download_url $}">{$ training_document.title $}</a>
+		 					</div>
+		 				</div>
 				 	</div>
 		 		</div>
 		 	</div>

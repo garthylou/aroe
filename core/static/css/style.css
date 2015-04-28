@@ -378,7 +378,26 @@ a:focus {
 .training-title {
 	height:100%;
 	margin-left: 1em;
-	display : inline;
+	display : inline-block;
+	max-width:40%;
+}
+.training-indicator {
+}
+
+.training-indicator:after {
+	clear: both;
+}
+
+.training-doc:before {
+	clear:both;
+}
+
+.training-doc a{
+	color:white;
+	font-size: 0.8em;
+}
+.training-doc a i {
+	font-size: 1.2em;
 }
 
 /* Last articles */
