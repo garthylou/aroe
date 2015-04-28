@@ -59,6 +59,17 @@
 		 				</p>
 		 				{%endif%}
 		 			</div>
+
+		 			{% if self.document_items.all|length > 0 %}
+		 			<div class="">
+		 				<p>Documents :</p>
+		 			{% for document_item in self.document_items.all %}
+		 				<div class="{{self.document_items.all|determine_dossier_class}}">
+		 					<i class="fa fa-file-text-o"></i> <a href="{{ document_item.document.url}}">{{document_item.document.title}}</a>
+		 				</div>
+		 			{% endfor %}
+		 			</div>
+		 			{% endif %}
 		 			<div class="col-md-12 col-lg-12"> 
 		 				<div data-social-share-privacy='true'></div>
 		 			</div>

@@ -4,9 +4,21 @@ var trainingMgt = angular.module('aroeTrainingMgt', []);
 trainingMgt.controller('TrainingCtrl', ['$scope', '$http', '$modal', 
                                 function($scope, $http, $modal) {
     $scope.training = null;
+    $scope.training_document = null;
 
+    $scope.$watch('training.document', function (newValue, oldValue)
+    {
+      if(newValue){
+        $http.get('/api/v1/documents/'+newValue+"/").success(function(result)
+        {
+          $scope.training_document = result;
+        });
+      } else {
+        $scope.training_document = null;
+      }
+    });
 
-    $scope.saveTraining = function(training)
+    $scope.updateTraining = function(training, callback)
     {
       var data = angular.copy(training);
       // The api does not manage time. We have to put only date and ISO formatted.
@@ -15,8 +27,19 @@ trainingMgt.controller('TrainingCtrl', ['$scope', '$http', '$modal',
 
       $http.put('/api/trainings/'+data.id, data).success(function(result)
         {
-         	$('#calendar').fullCalendar('updateEvent', training );
+          if(callback)
+          {
+            callback();
+          }
         });
+    }
+
+
+    $scope.saveTraining = function(training)
+    {
+      $scope.updateTraining(training, function() {
+        $('#calendar').fullCalendar('updateEvent', training );
+      });
       return training;
     };
 
@@ -43,10 +66,32 @@ trainingMgt.controller('TrainingCtrl', ['$scope', '$http', '$modal',
 			}
 		});
 
-		return modalInstance.result.then(function (localTitle){
-			 return localTitle;
-		});
+  		return modalInstance.result.then(function (localTitle){
+	 		 return localTitle;
+	   	})
     };
+
+
+    $scope.associateDocument = function(training)
+    {
+      var t = ModalWorkflow({
+        url: window.chooserUrls.documentChooser,
+        responses: {
+          documentChosen: function(docData) {
+            training_document = docData;
+            training.document = docData.id;
+            $scope.updateTraining(training);
+          }
+        },
+      });
+    };
+
+    $scope.disassociateDocument = function(training) 
+    {
+      $scope.training.document = null;
+      $scope.updateTraining($scope.training);
+    }
+
 
 }
 ]);

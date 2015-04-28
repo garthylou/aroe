@@ -4,6 +4,7 @@ from django.db import models
 from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, \
 InlinePanel, PageChooserPanel
 from modelcluster.fields import ParentalKey
@@ -179,6 +180,20 @@ class ArticleImageItem(Orderable, models.Model):
 	]
 	page = ParentalKey('aroe.ArticlePage', related_name='image_items')
 
+class ArticleDocumentItem(Orderable, models.Model):
+	document = models.ForeignKey(
+		'wagtaildocs.Document',
+		null=True,
+		blank=True,
+		on_delete=models.SET_NULL,
+		related_name='+',
+		verbose_name=_('document')
+	)
+	panels = [
+		DocumentChooserPanel('document', ),
+	]
+	page = ParentalKey('aroe.ArticlePage', related_name='document_items')
+
 
 class ArticlePage(Page):
 	text_content = RichTextField(blank=True,verbose_name=_("Content"),help_text=_("Content of the article."))
@@ -189,6 +204,7 @@ ArticlePage.content_panels = [
 	FieldPanel('title', classname="full title"),
 	FieldPanel('text_content', classname="full"),
 	InlinePanel(ArticlePage, 'image_items', label=_("Images")),
+	InlinePanel(ArticlePage, 'document_items', label=_('Documents')),
 ]
 
 

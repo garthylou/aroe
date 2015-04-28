@@ -41,3 +41,23 @@
 	width: 0; 
 	height:20px;
 }
+
+.actions {
+	overflow: hidden;
+	clear: both;
+    display : inline-block;
+}
+
+.actions:before .actions:after{
+	content : " ";
+	display : table;
+}
+
+.actions:after {
+	clear : both;
+}
+
+.actions li {
+    float: left;
+    margin: 0.3em;
+}

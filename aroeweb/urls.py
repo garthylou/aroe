@@ -10,6 +10,7 @@ from wagtail.wagtailsearch import urls as wagtailsearch_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
 from wagtail.wagtailcore import urls as wagtail_urls
 from aroeapi.urls import routerapi
+from wagtailapi import urls as wagtailapi_urls
 
 
 urlpatterns = patterns('',
@@ -18,11 +19,11 @@ urlpatterns = patterns('',
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^search/', include(wagtailsearch_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
-
-    url(r'', include(wagtail_urls)),
     # REST API
     url(r'^api/', include(routerapi)),
+    url(r'^api/', include(wagtailapi_urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'', include(wagtail_urls)),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

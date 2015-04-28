@@ -63,3 +63,13 @@ button:disabled {
     border-color : inherit;
     color : inherit;
 }
+
+.modal-content {
+    margin-top: initial;
+    padding-bottom: initial;
+
+}
+
+.tab-nav a {
+    max-height : initial;
+    }

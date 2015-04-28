@@ -14,9 +14,9 @@ def path_members_photo(instance, filename):
 	"""
 	fn, extension = os.path.splitext(filename)
 	if instance.id is not None :
-		return 'members/photo/%s-%s-%s.%s' % (instance.id, instance.family_name,instance.firstname, extension)
+		return u'members/photo/%s-%s-%s.%s' % (instance.id, instance.family_name,instance.firstname, extension)
 	else:
-		return 'members/photo/%s-%s.%s' % (instance.family_name,instance.firstname, extension)
+		return u'members/photo/%s-%s.%s' % (instance.family_name,instance.firstname, extension)
 
 class Member(models.Model):
 	family_name = models.CharField(_('Family name'), max_length=200)
@@ -42,3 +42,9 @@ class Training(models.Model):
 	seats = models.PositiveIntegerField(_('Seats'),blank=True, null=True)
 	occupied_seats = models.PositiveIntegerField(_('Seats'), blank=True, null=True)
 	location = models.CharField(_('Location'), max_length=300, blank=True, null=True)
+	document = models.ForeignKey('wagtaildocs.Document' ,verbose_name=_('Documentation'), null=True, blank=True,
+		on_delete=models.SET_NULL,
+		related_name='+')
+
+	def __unicode__(self):
+		return u"{0} {1} {2}".format( self.title, self.start, self.end )
