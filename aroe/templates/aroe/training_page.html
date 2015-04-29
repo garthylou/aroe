@@ -62,8 +62,9 @@
 				 		</div>
 				 		<div class="col-md-12 col-lg-12">
 		 					<h6>{% trans 'Document' %}</h6>
-		 					<div ng-show="training_document != null">
-		 						<i class="fa fa-file-text-o"></i> <a ng-href="{$ training_document.meta.download_url $}">{$ training_document.title $}</a>
+		 					<div ng-show="training.document != null || training.page != null">
+
+		 						<a ng-href="{$ document_url $}"><i class="fa fa-file-text-o"></i> {$ document_title $}</a>
 		 					</div>
 		 				</div>
 				 	</div>

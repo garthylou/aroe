@@ -42,7 +42,12 @@ class Training(models.Model):
 	seats = models.PositiveIntegerField(_('Seats'),blank=True, null=True)
 	occupied_seats = models.PositiveIntegerField(_('Seats'), blank=True, null=True)
 	location = models.CharField(_('Location'), max_length=300, blank=True, null=True)
-	document = models.ForeignKey('wagtaildocs.Document' ,verbose_name=_('Documentation'), null=True, blank=True,
+	document = models.ForeignKey('wagtaildocs.Document' ,verbose_name=_('Documentation'), 
+		null=True, blank=True,
+		on_delete=models.SET_NULL,
+		related_name='+')
+	page = models.ForeignKey('wagtailcore.Page' ,verbose_name=_('Documentations'), 
+		null=True, blank=True,
 		on_delete=models.SET_NULL,
 		related_name='+')
 

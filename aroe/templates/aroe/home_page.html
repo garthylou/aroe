@@ -112,6 +112,11 @@
 		 							<a href="{{training.document.url}}" data-toggle="tooltip" title="{{training.document.title}}"><i class="fa fa-file-text-o"></i> plus d'infos</a>
 		 						</div>
 		 						{% endif %}
+		 						{% if training.page != null %}
+		 						<div class="training-doc">
+		 							<a href="{{training.page.url}}" data-toggle="tooltip" title="{{training.page.title}}"><i class="fa fa-file-text-o"></i> plus d'infos</a>
+		 						</div>
+		 						{% endif %}
 		 						</div>
 		 					</div></li>
 		 					{% empty %}

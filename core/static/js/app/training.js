@@ -4,14 +4,24 @@ var trainingMgt = angular.module('aroeTrainingMgt', []);
 trainingMgt.controller('TrainingCtrl', ['$scope', '$http', '$modal', 
                                 function($scope, $http, $modal) {
     $scope.training = null;
+    $scope.document_type = 'file';
 
     $scope.$watch('training.document', function(newValue, oldValue)
     {
       if(newValue)
       {
         $scope.get_download_url(newValue);
+        $scope.document_type = 'file';
       } else {
         $scope.document_url = "";
+      }
+    });
+
+    $scope.$watch('training.page', function(newValue, oldValue)
+    {
+      if(newValue)
+      {
+        $scope.document_type= 'page';
       }
     });
 
@@ -25,6 +35,7 @@ trainingMgt.controller('TrainingCtrl', ['$scope', '$http', '$modal',
       $http.put('/api/trainings/'+data.id, data).success(function(result)
         {
           $scope.training.document_detail = result.document_detail;
+          $scope.training.page_detail = result.page_detail;
 
           if(callback)
           {
@@ -78,6 +89,10 @@ trainingMgt.controller('TrainingCtrl', ['$scope', '$http', '$modal',
         responses: {
           documentChosen: function(docData) {
             training.document = docData.id;
+            if (training.page)
+            {
+              training.page = null;
+            }
             $scope.updateTraining(training);
           }
         },
@@ -101,6 +116,29 @@ trainingMgt.controller('TrainingCtrl', ['$scope', '$http', '$modal',
       } else {
         $scope.document_url = "";
       }
+    }
+
+    $scope.associatePage = function(training)
+    {
+      var t = ModalWorkflow({
+        url: window.chooserUrls.pageChooser,
+        responses: {
+          pageChosen: function(pageData) {
+            training.page = pageData.id;
+            if(training.document)
+            {
+              training.document = null;
+            }
+            $scope.updateTraining(training);
+          }
+        },
+      });
+    };
+
+    $scope.disassociatePage = function(training) 
+    {
+      $scope.training.page = null;
+      $scope.updateTraining($scope.training);
     }
 
 }
@@ -137,17 +175,39 @@ members.controller('TrainingCtrl', ['$scope', '$filter', '$http',
 
   $scope.training = null;
 
-  $scope.training_document = null;
-
     $scope.$watch('training.document', function (newValue, oldValue)
     {
-      if(newValue){
-        $http.get('/api/v1/documents/'+newValue+"/").success(function(result)
-        {
-          $scope.training_document = result;
-        });
-      } else {
-        $scope.training_document = null;
+      if(newValue)
+      {
+        $scope.get_download_url(newValue, 'file');
+        $scope.document_title = $scope.training.document_detail.title;
       }
     });
+
+    $scope.$watch('training.page', function (newValue, oldValue)
+    {
+      if(newValue)
+      {
+        $scope.get_download_url(newValue, 'page');
+        $scope.document_title = $scope.training.page_detail.title;
+      }
+    });
+
+    $scope.get_download_url = function(document_id, type)
+    {
+      if(document_id)
+      {
+        if(type=='file'){
+          $scope.document_url = $http.get('/api/v1/documents/'+document_id+"/").success(function(result)
+          {
+            $scope.document_url = result.meta.download_url;
+          });
+        } else {
+          $scope.document_url = $scope.training.page_detail.url;
+        }
+      } else {
+        $scope.document_url = "";
+        
+      }
+    }
 }]);
