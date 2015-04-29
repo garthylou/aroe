@@ -8,7 +8,6 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wagtailcore', '0013_update_golive_expire_help_text'),
         ('aroeapi', '0007_training_document'),
     ]
 
