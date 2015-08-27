@@ -14,8 +14,11 @@ COMPRESS_OFFLINE = True
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': join(PROJECT_ROOT, '../db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'aroeweb',
+	'USER' : '',
+	'PASSWORD' : '',
+	'HOST': 'localhost',
     }
 }
 
