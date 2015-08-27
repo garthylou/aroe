@@ -16,7 +16,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'aroeweb',
-	'USER' : '',
+	'USER' : 'hosting-db',
 	'PASSWORD' : '',
 	'HOST': 'localhost',
     }
