@@ -2,7 +2,7 @@ var aroeApp = angular.module('aroe', [
 	'ngCookies',
 	'xeditable',
 	'ui.bootstrap',
-	'angularFileUpload',
+	'ngFileUpload',
 	'angular-growl',
 	'ngAnimate',
 	'ngSanitize',

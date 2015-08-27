@@ -16,7 +16,7 @@
 
 	 <div class="container mt">
 	 	<div class="row">
-		 	<div class="col-md-2 col-lg-2">
+		 	<div class="col-md-2 col-lg-2 menu-container">
 		 		{% article_menu as dossiermenu %}
 		 		<h4>{{dossier.title}}</h4>
 		 		<div class="hline"></div>
@@ -61,7 +61,7 @@
 		 			</div>
 
 		 			{% if self.document_items.all|length > 0 %}
-		 			<div class="">
+		 			<div class="col-md-12 col-lg-12">
 		 				<p>Documents :</p>
 		 			{% for document_item in self.document_items.all %}
 		 				<div class="{{self.document_items.all|determine_dossier_class}}">
@@ -70,7 +70,7 @@
 		 			{% endfor %}
 		 			</div>
 		 			{% endif %}
-		 			<div class="col-md-12 col-lg-12"> 
+		 			<div class="col-md-12 col-lg-12">
 		 				<div data-social-share-privacy='true'></div>
 		 			</div>
 		 		</div>

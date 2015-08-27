@@ -20,3 +20,8 @@
 {
 	color: #0B0B61;
 }
+
+.menu-container
+{
+	min-height: 300px;
+}

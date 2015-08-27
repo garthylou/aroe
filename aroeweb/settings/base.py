@@ -56,7 +56,7 @@ INSTALLED_APPS = (
     'wagtail.wagtailsearch',
     'wagtail.wagtailredirects',
     'wagtail.wagtailforms',
-    'wagtailapi',
+    'wagtail.contrib.wagtailapi',
 
     'core',
     'aroe',
@@ -120,6 +120,8 @@ LOCALE_PATHS = (join(PROJECT_ROOT, 'locale'),
 
 STATIC_ROOT = join(PROJECT_ROOT, 'static')
 STATIC_URL = '/static/'
+STATICFILES_DIRS = ()
+
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -136,6 +138,8 @@ WAGTAILAPI_BASE_URL = "http://localhost:8000"
 # http://django-compressor.readthedocs.org/en/latest/settings/
 
 COMPRESS_PRECOMPILERS = (
+    ('text/coffeescript', 'coffee --compile --stdio'),
+    ('text/less', 'lessc {infile} {outfile}'),
     ('text/x-scss', 'django_libsass.SassCompiler'),
 )
 

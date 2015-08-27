@@ -1,7 +1,7 @@
-var membersMgt = angular.module('aroeMembersMgt', ['angularFileUpload']);
+var membersMgt = angular.module('aroeMembersMgt', ['ngFileUpload']);
 
-membersMgt.controller('MembersRowCtrl', ['$scope', '$filter', '$http', '$upload', 'growl', 
-                                function($scope, $filter, $http, $upload, growl) {
+membersMgt.controller('MembersRowCtrl', ['$scope', '$filter', '$http', 'Upload', 'growl', 
+                                function($scope, $filter, $http, Upload, growl) {
 
   
   $scope.$watch('files', function () {
@@ -82,7 +82,7 @@ membersMgt.controller('MembersRowCtrl', ['$scope', '$filter', '$http', '$upload'
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
                 $scope.picFile = file;
-                $upload.upload({
+                Upload.upload({
                     url: '/api/avatars/'+$scope.selecteduser.id,
                     file: file,
                     fileFormDataName: 'photo',

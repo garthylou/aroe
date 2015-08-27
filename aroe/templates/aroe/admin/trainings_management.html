@@ -1,22 +1,22 @@
 {% extends "wagtailadmin/base.html" %}
 {% load i18n %}
-{% load gravatar compress %}
+{% load gravatar compress static%}
 {% block titletag %}{% trans "Trainings management" %}{% endblock %}
 {% block bodyclass %}homepage{% endblock %}
 
 
 {% block css %}
     {% compress css %}
-        <link rel="stylesheet" href="{{ STATIC_URL }}wagtailadmin/scss/vendor/jquery-ui/jquery-ui-1.10.3.verdant.css" />
+        <link rel="stylesheet" href="{% static 'wagtailadmin/css/vendor/jquery-ui/jquery-ui-1.10.3.verdant.css' %}" />
         <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="{{ STATIC_URL }}wagtailadmin/scss/core.scss" type="text/x-scss" />
-       	<link rel="stylesheet" href="{{ STATIC_URL }}css/admin/bootstrap-wagtail-hack.css" type="text/css" />
+        <link rel="stylesheet" href="{% static 'wagtailadmin/css/core.css' %}" type="text/css" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/admin/bootstrap-wagtail-hack.css" type="text/css" />
     {% endcompress %}
 
     {% block extra_css %}
 		{% compress css %}
 		<link rel="stylesheet" href="{{ STATIC_URL}}bower_components/angular-xeditable/dist/css/xeditable.css"/>
-		<link rel="stylesheet" href="{{ STATIC_URL }}wagtailadmin/scss/layouts/home.scss" type="text/x-scss" />
+		<link rel="stylesheet" href="{% static 'wagtailadmin/css/layouts/home.css' %}" type="text/css" />
 		<link rel="stylesheet" href="{{ STATIC_URL }}css/admin/aroe-admin.css" type="text/css" />
 		<link rel="stylesheet" href="{{ STATIC_URL}}bower_components/fullcalendar/dist/fullcalendar.css"/>
 		<link href="{{ STATIC_URL}}css/font-awesome.css" rel="stylesheet" type="text/css">
@@ -180,8 +180,8 @@ window.chooserUrls.documentChooser = '/admin/documents/chooser/';
 <script src="{{STATIC_URL}}bower_components/angular-cookies/angular-cookies.js"></script>
 <script src="{{STATIC_URL}}bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="{{STATIC_URL}}bower_components/angular-xeditable/dist/js/xeditable.js"></script>
-<script src="{{STATIC_URL}}bower_components/ng-file-upload/angular-file-upload-shim.js"></script> <!-- for no html5 browsers support -->
-<script src="{{STATIC_URL}}bower_components/ng-file-upload/angular-file-upload.js"></script> 
+<script src="{{STATIC_URL}}bower_components/ng-file-upload/ng-file-upload-shim.js"></script> <!-- for no html5 browsers support -->
+<script src="{{STATIC_URL}}bower_components/ng-file-upload/ng-file-upload.js"></script> 
 <script src='{{STATIC_URL}}bower_components/moment/moment.js'></script>
 <script src='{{STATIC_URL}}bower_components/fullcalendar/dist/fullcalendar.js'></script>
 <script src='{{STATIC_URL}}bower_components/fullcalendar/dist/lang/fr.js'></script>

@@ -1,15 +1,15 @@
 {% extends "wagtailadmin/base.html" %}
 {% load i18n %}
-{% load gravatar compress %}
+{% load gravatar compress static%}
 {% block titletag %}{% trans "Members management" %}{% endblock %}
 {% block bodyclass %}homepage{% endblock %}
 
 
 {% block css %}
     {% compress css %}
-        <link rel="stylesheet" href="{{ STATIC_URL }}wagtailadmin/scss/vendor/jquery-ui/jquery-ui-1.10.3.verdant.css" />
+        <link rel="stylesheet" href="{% static 'wagtailadmin/css/vendor/jquery-ui/jquery-ui-1.10.3.verdant.css' %}" />
         <link rel="stylesheet" href="{{ STATIC_URL }}bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="{{ STATIC_URL }}wagtailadmin/scss/core.scss" type="text/x-scss" />
+        <link rel="stylesheet" href="{% static 'wagtailadmin/css/core.css' %}" type="text/css" />
         <link rel="stylesheet" href="{{ STATIC_URL }}css/admin/bootstrap-wagtail-hack.css" type="text/css" />
     {% endcompress %}
 
@@ -17,7 +17,7 @@
 		{% compress css %}
 		<link rel="stylesheet" href="{{ STATIC_URL}}bower_components/angular-xeditable/dist/css/xeditable.css"/>
 		<link href="{{STATIC_URL}}css/angular-growl.min.css" rel="stylesheet">
-		<link rel="stylesheet" href="{{ STATIC_URL }}wagtailadmin/scss/layouts/home.scss" type="text/x-scss" />
+		<link rel="stylesheet" href="{% static 'wagtailadmin/css/layouts/home.css' %}" type="text/css" />
 		<link rel="stylesheet" href="{{ STATIC_URL }}css/admin/aroe-admin.css" type="text/css" />
 		{% endcompress %}
 	{% endblock %}
@@ -160,8 +160,8 @@
 <script src="{{STATIC_URL}}bower_components/angular-cookies/angular-cookies.min.js"></script>
 <script src="{{STATIC_URL}}bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 <script src="{{STATIC_URL}}bower_components/angular-xeditable/dist/js/xeditable.min.js"></script>
-<script src="{{STATIC_URL}}bower_components/ng-file-upload/angular-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
-<script src="{{STATIC_URL}}bower_components/ng-file-upload/angular-file-upload.min.js"></script> 
+<script src="{{STATIC_URL}}bower_components/ng-file-upload/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
+<script src="{{STATIC_URL}}bower_components/ng-file-upload/ng-file-upload.min.js"></script> 
  <script src="{{STATIC_URL}}bower_components/angular-sanitize/angular-sanitize.min.js"></script>
 <script src="{{STATIC_URL}}bower_components/angular-animate/angular-animate.min.js"></script>
 <script src="{{STATIC_URL}}bower_components/angular-growl/build/angular-growl.js"></script>
