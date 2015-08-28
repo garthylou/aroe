@@ -14,6 +14,8 @@ from django.utils.translation import ugettext_lazy as _
 from rest_framework.settings import api_settings
 from rest_framework_csv import renderers as r
 from core.image_processing import ImageProcessor
+from django.conf import settings
+from django.core.mail import send_mail
 
 from PIL import Image, ExifTags
 import os,sys
@@ -74,6 +76,8 @@ def send_message(request):
 				request.data['message']
 				)
 			)
+			send_mail('[Site AROE] - Contact', request.data['message'], request.data['from'],
+    			[settings.EMAIL_ASSOCIATION], fail_silently=False)
 		else :
 			# Find the matching user
 			member = models.Member.objects.get(pk=request.data['to'])
@@ -83,6 +87,8 @@ def send_message(request):
 				request.data['message']
 				)
 			)
-		return Response(_("Your message has not been sent, because it does not work on this environment"), status=status.HTTP_400_BAD_REQUEST)
-		#return Response(_("Your message has been sent."))
+			send_mail('[Site AROE] - Contact direct', request.data['message'], request.data['from'],
+    		[member.email], fail_silently=False)
+		#return Response(_("Your message has not been sent, because it does not work on this environment"), status=status.HTTP_400_BAD_REQUEST)
+		return Response(_("Your message has been sent."))
 	return Response("Not authorized.",status=status.HTTP_400_BAD_REQUEST)

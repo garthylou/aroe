@@ -57,6 +57,7 @@ INSTALLED_APPS = (
     'wagtail.wagtailredirects',
     'wagtail.wagtailforms',
     'wagtail.contrib.wagtailapi',
+    'wagtail.contrib.wagtailsitemaps',
 
     'core',
     'aroe',

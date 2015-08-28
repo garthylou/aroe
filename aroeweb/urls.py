@@ -11,6 +11,8 @@ from wagtail.wagtaildocs import urls as wagtaildocs_urls
 from wagtail.wagtailcore import urls as wagtail_urls
 from aroeapi.urls import routerapi
 from wagtail.contrib.wagtailapi import urls as wagtailapi_urls
+from wagtail.contrib.wagtailsitemaps.views import sitemap
+
 
 
 urlpatterns = patterns('',
@@ -19,6 +21,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^search/', include(wagtailsearch_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
+    url('^sitemap\.xml$', sitemap),
     # REST API
     url(r'^api/', include(routerapi)),
     url(r'^api/', include(wagtailapi_urls)),

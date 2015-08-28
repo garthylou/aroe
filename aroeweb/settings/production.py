@@ -22,6 +22,11 @@ DATABASES = {
     }
 }
 
+EMAIL_ASSOCIATION='jeanbaptiste.gury@gmail.com'
+EMAIL_HOST='smtp1.dc0.gpaas.net'
+EMAIL_PORT=25
+
+
 
 # Send notification emails as a background task using Celery,
 # to prevent this from blocking web server threads
