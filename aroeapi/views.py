@@ -24,8 +24,8 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-MAX_WIDTH = 800
-MAX_HEIGHT= 600
+MAX_WIDTH = 150
+MAX_HEIGHT= 200
 
 class MembersViewSet(viewsets.ModelViewSet):
 	queryset = models.Member.objects.all()
@@ -53,7 +53,7 @@ class AvatarMemberViewSet(viewsets.ModelViewSet):
 			img_proc = ImageProcessor(instance.photo.path)
 			try :
 				img_proc.auto_orient()
-				img_proc.resize(800,600)
+				img_proc.resize(MAX_WIDTH,MAX_HEIGHT)
 			except NameError as e:
 				logger.error(sys.exc_info()[0])
 				logger.error(e)
