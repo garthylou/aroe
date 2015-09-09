@@ -77,37 +77,34 @@ membersMgt.controller('MembersRowCtrl', ['$scope', '$filter', '$http', 'Upload',
     $scope.selecteduser = user;
   }
 
-  $scope.upload = function (files) {
-        if (files && files.length) {
-            for (var i = 0; i < files.length; i++) {
-                var file = files[i];
-                $scope.picFile = file;
-                Upload.upload({
-                    url: '/api/avatars/'+$scope.selecteduser.id,
-                    file: file,
-                    fileFormDataName: 'photo',
-                    method : 'PUT',
-                }).progress(function (evt) {
-                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                    file.progress = progressPercentage;
-                }).success(function (data, status, headers, config) {
-                  $scope.selecteduser.photo = data.photo;
-                  $scope.users.find(function (element, index, array) {
-                    if (element.id == $scope.selecteduser.id){
-                      return true;
-                    }
-                  }).photo = data.photo;
-                  $scope.files = [];
-                }).error(function(result)
-                {
-                  if (result.photo[0]) {
-                    growl.addErrorMessage(result.photo[0]);
-                  } else {
-                    growl.addErrorMessage(result);
-                  }
-                });
-            }
-        }
+  $scope.upload = function (file) {
+    $scope.file = file;
+    if (file && !file.$error)
+      Upload.upload({
+        url: '/api/avatars/'+$scope.selecteduser.id,
+        file: file,
+        fileFormDataName: 'photo',
+        method : 'PUT',
+      }).progress(function (evt) {
+        var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+        file.progress = progressPercentage;
+      }).success(
+        function (data, status, headers, config) {
+          $scope.selecteduser.photo = data.photo;
+          $scope.users.find(function (element, index, array) {
+          if (element.id == $scope.selecteduser.id){
+            return true;
+          }
+        }).photo = data.photo;
+        $scope.file = null;
+      }).error(function(result)
+        {
+          if (result.photo[0]) {
+            growl.addErrorMessage(result.photo[0]);
+          } else {
+            growl.addErrorMessage(result);
+          }
+        });
     };
 
     $scope.clearAvatar = function(){

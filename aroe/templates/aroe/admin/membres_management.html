@@ -76,10 +76,10 @@
 						ng-show="selecteduser.photo != null && selecteduser != null"
 						><span aria-hidden="true">&times;</span><span class="sr-only">{% trans 'Clear avatar' %}</span>
 					</button>
- 					<button class="btn btn-xs btn-default" ng-file-select ng-model="files"  ng-show="selecteduser != null" ng-disabled="editableForm.$visible || selecteduser.id == null" >Change photo</button>
- 					<img ng-show="files[0].dataUrl != null" ng-src="{$ files[0].dataUrl $}" class="thumb">
-					<span class="progress-upload" ng-show="files[0].progress >= 0">		
-						<div class="ng-binding" style="width:{$ files[0].progress $}%" ng-bind="files[0].progress + '%'"></div>
+ 					<button class="btn btn-xs btn-default" ngf-select="upload($file)" ng-show="selecteduser != null" ng-disabled="editableForm.$visible || selecteduser.id == null" >Change photo</button>
+ 					<img ng-show="file.dataUrl != null" ng-src="{$ file.dataUrl $}" class="thumb">
+					<span class="progress-upload" ng-show="file.progress >= 0">		
+						<div class="ng-binding" style="width:{$ file.progress $}%" ng-bind="file.progress + '%'"></div>
 					</span>	
 
  				</div>
